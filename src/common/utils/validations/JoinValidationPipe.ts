@@ -17,7 +17,7 @@ export class JoiValidationPipe implements PipeTransform {
     const message = error?.message;
 
     if (error) {
-      throw  BadRequest(message);
+      throw  BadRequest({message});
     }
     return value;
   }

@@ -19,7 +19,7 @@ function typeormModuleOptions(): TypeOrmModuleOptions {
      */
     migrationsRun: true,
     migrations: [join(__dirname, '../db/migration/**/*{.ts,.js}')],
-    migrationsTableName: 'migrations_typeorm',
+    migrationsTableName: 'migrations',
     cli: {
       migrationsDir: 'src/db/migration',
     },

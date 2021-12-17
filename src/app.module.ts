@@ -17,14 +17,9 @@ import databaseConfig from './config/database.config';
       }`,
       cache: true,
     }),
-   
-    
-   
   ],
 
-  providers: [
-    AppConfigService,
-  ],
+  providers: [AppConfigService],
 })
 export class AppModule {
   static port: number | string;

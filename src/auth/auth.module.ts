@@ -4,7 +4,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { ConfigDBModule } from 'src/config/getterConfig.module';
 import { AppConfigService } from 'src/config/getterConfig.service';
-import { UsersModule } from 'src/db/api/users/users.module';
+import { EmployeesModule } from 'src/db/api/employees/employees.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { RolesGuard } from './guards/roles.guards';
@@ -15,7 +15,7 @@ import { LocalStrategy } from './strategies/local.strategy';
 @Module({
   imports: [
     ConfigDBModule,
-    UsersModule,
+    EmployeesModule,
     PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigDBModule],
