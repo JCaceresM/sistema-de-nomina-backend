@@ -10,6 +10,7 @@ import { ActivityModule } from './api/activity/activity.module';
 import { PaysheetModule } from './api/paysheet/paysheet.module';
 import { CashDiscountModule } from './api/cash-discount/cash-discount.module';
 import { PaymentNewsModule } from './api/payment-news/payment-news.module';
+import { UsersModule } from './api/users/users.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { PaymentNewsModule } from './api/payment-news/payment-news.module';
     PaysheetModule,
     CashDiscountModule,
     PaymentNewsModule,
+    UsersModule,
   ],
 })
 export class DatabaseEntitiesModule {}

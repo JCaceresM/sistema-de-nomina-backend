@@ -7,9 +7,11 @@ import { CreateEmployeeDto } from 'src/db/api/employees/dto/create-employee.dto'
 import { CreateRoleDto } from 'src/db/api/roles/dto/create-role.dto';
 import { CreateCompanyDto } from 'src/db/api/company/dto/create-company.dto';
 import { AppConfigService } from 'src/config/getterConfig.service';
+import { UserEntity } from 'src/db/api/users/entities/user.entity';
+import { CreateUserDto } from 'src/db/api/users/dto/create-user.dto';
 
 const setDefaultUser = async (config: ConfigService, appConfigService: AppConfigService) => {
-  const EmployeeRepository = getRepository<CreateEmployeeDto>(EmployeeEntity);
+  const EmployeeRepository = getRepository<CreateUserDto>(UserEntity);
   const rolesRepository = getRepository<CreateRoleDto>(RoleEntity);
   const companyRepository = getRepository<CreateCompanyDto>(CompanyEntity);
   let defaultRoles = await rolesRepository.find();
@@ -56,7 +58,7 @@ const setDefaultUser = async (config: ConfigService, appConfigService: AppConfig
       email_login: config.get<string>('DEFAULT_USER_EMAIL'),
       password: config.get<string>('DEFAULT_USER_PASSWORD'),
       roles: defaultRoles,
-      document_id:"000000000"
+  
 
     });
 
