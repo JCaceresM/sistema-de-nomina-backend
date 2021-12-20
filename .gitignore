@@ -3,7 +3,6 @@
 /node_modules
 package-lock.json
 ormconfig.json
-setDefaultUser.ts
 
 # Logs
 logs

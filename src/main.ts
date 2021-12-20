@@ -9,6 +9,7 @@ import { ConfigService } from '@nestjs/config';
 import { initSwagger } from './app.swagger';
 import { AppConfigService } from './config/getterConfig.service';
 import { Logger, ValidationPipe } from '@nestjs/common';
+import setDefaultUser from './scripts/setDefaultUser';
 
 
 async function bootstrap() {
@@ -26,6 +27,7 @@ async function bootstrap() {
   initSwagger(app)
   
   generateTypeormConfigFile(config, appConfig);
+  setDefaultUser( config, appConfig);
   app.use(bodyParser.json({limit: '50mb'}));
   app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
   
