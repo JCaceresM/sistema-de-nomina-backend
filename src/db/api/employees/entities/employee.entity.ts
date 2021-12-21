@@ -13,6 +13,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import * as bcrypt from 'bcrypt';
 import { DepartmentEntity } from '../../departments/entities/department.entity';
 import { RoleEntity } from '../../roles/entities/role.entity';
 import { ContactParentEntity } from '../../contact-parent/entities/contact-parent.entity';
@@ -26,64 +27,83 @@ export class EmployeeEntity {
   @Column({ type: 'text', unique: true })
   document_id: string;
 
-  @Column({ type: 'text', unique: false, nullable: true })
+  @Column({ type: 'text', unique: false })
+  user_name: string;
+
+  @Column({ type: 'text', unique: true })
+  email_login: string;
+
+  @Column({ type: 'text', unique: false })
+  password: string;
+
+  @Column({ type: 'text', unique: false,nullable: true })
   fist_name: string;
 
-  @Column({ type: 'text', unique: false, nullable: true })
+  @Column({ type: 'text', unique: false,nullable: true })
   last_name: string;
 
-  @Column({ type: 'text', unique: false, nullable: true })
+  @Column({ type: 'text', unique: false,nullable: true })
   gender: string;
 
-  @Column({ type: 'integer', unique: false, nullable: true })
+  @Column({ type: 'integer', unique: false,nullable: true })
   age: number;
 
-  @Column({ type: 'text', unique: false, nullable: true })
+  @Column({ type: 'text', unique: false,nullable: true })
   marital_status: string;
 
   @Column({ type: 'text', unique: false })
   status: string;
 
-  @Column({ type: 'timestamp', unique: false, nullable: true })
+  @Column({ type: 'timestamp', unique: false,nullable: true })
   born_date: Date;
 
-  @Column({ type: 'timestamp', unique: false, nullable: true })
+  @Column({ type: 'timestamp', unique: false,nullable: true })
   hire_date: Date;
 
-  @Column({ type: 'text', unique: false, nullable: true })
+  @Column({ type: 'text', unique: false,nullable: true })
   nss: string;
 
   @ManyToOne(() => DepartmentEntity, (department) => department.employees)
-  @JoinColumn({ name: 'department_id' })
+  @JoinColumn({ name: "department_id" })
   department_id: DepartmentEntity;
 
-  @Column({ type: 'text', unique: false, nullable: true })
+  @Column({ type: 'text', unique: false,nullable: true })
   nomina_id: string;
 
-  @UpdateDateColumn({ type: 'timestamp', nullable: true })
+  @UpdateDateColumn({ type: 'timestamp',nullable: true })
   update_at: Date;
 
   @CreateDateColumn({ type: 'timestamp', nullable: false })
   create_at: Date;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: 'text',nullable: true })
   user_update: string;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: 'text',nullable: true  })
   user_insert: string;
 
- 
+  @ManyToMany(() => RoleEntity)
+  @JoinTable()
+  roles: RoleEntity[]
 
-  @OneToMany(
-    () => ContactParentEntity,
-    (contactParent) => contactParent.employee_id,
-  )
+  @OneToMany(() => ContactParentEntity, contactParent => contactParent.employee_id)
   contactParent: ContactParentEntity[];
 
-  @OneToMany(() => ActivityEntity, (activity) => activity.employee_id)
+  @OneToMany(() => ActivityEntity, activity => activity.employee_id)
   activities: ActivityEntity[];
 
   @OneToOne(() => PaysheetEntity)
-  @JoinColumn({ name: 'paysheet_id' })
-  paysheet_id: PaysheetEntity;
+  @JoinColumn({ name: "paysheet_id" })
+  paysheet_id: PaysheetEntity; 
+
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  async hashPassword() {
+    const saltOrRounds = 10;
+    if (!this.password) {
+      return;
+    }
+    this.password = await bcrypt.hash(this.password, saltOrRounds);
+  }
 }

@@ -14,6 +14,5 @@ export class AuthController {
   @ApiResponse({ status: 201, description: 'authenticated.'})
   async login(@Body() body: Credentials, @Request() req) {
     return this.authService.login(req.user);
-
   }
 }

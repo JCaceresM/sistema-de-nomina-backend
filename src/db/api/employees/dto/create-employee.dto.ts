@@ -13,6 +13,15 @@ export class CreateEmployeeDto {
   document_id: string;
 
   @ApiProperty()
+  user_name: string;
+
+  @ApiProperty()
+  email_login: string;
+
+  @ApiProperty()
+  password: string;
+
+  @ApiProperty()
   fist_name: string;
 
   @ApiProperty()
@@ -57,7 +66,8 @@ export class CreateEmployeeDto {
   @ApiProperty()
   user_insert: string;
 
-  
+  @ApiProperty()
+  roles: RoleEntity[];
   
   @ApiProperty()
   activities: ActivityEntity[];
