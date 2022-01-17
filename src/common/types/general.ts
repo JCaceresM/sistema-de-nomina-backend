@@ -39,7 +39,8 @@ export type Consents = {
   request: any;
 };
 
-export type SmartHealt = {
-  response: any;
-  codigo: string;
+export type PaginationType = {
+  take: number;
+  skip: number;
 };
+export type Nullable<T> = T | null

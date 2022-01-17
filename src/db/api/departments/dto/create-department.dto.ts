@@ -3,7 +3,7 @@ import { CompanyEntity } from '../../company/entities/company.entity';
 
 export class CreateDepartmentDto {
   @ApiProperty()
-  private id: string;
+  private id: number;
 
   @ApiProperty()
   name: string;
@@ -15,7 +15,7 @@ export class CreateDepartmentDto {
   budget: number;
 
   @ApiProperty()
-  company_id: string;
+  company_id: number;
 
   @ApiProperty()
   status: string;
@@ -24,10 +24,10 @@ export class CreateDepartmentDto {
   type: string;
 
   @ApiProperty()
-  update_at: Date;
+  updated_at: Date;
 
   @ApiProperty()
-  create_at: Date;
+  created_at: Date;
 
   @ApiProperty()
   user_update: string;

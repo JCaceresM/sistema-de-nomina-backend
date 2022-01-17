@@ -1,4 +1,2 @@
 
-import generateTypeormConfigFile from "./generateTypeormFile";
-
-export { generateTypeormConfigFile,  }
+export * as userScrips from './setDefaultUser'

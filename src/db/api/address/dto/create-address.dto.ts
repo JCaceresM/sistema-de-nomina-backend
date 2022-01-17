@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateAddressDto {
   @ApiProperty()
-  id: string;
+ id: number;
 
   @ApiProperty()
   street: string;
@@ -29,10 +29,10 @@ export class CreateAddressDto {
   email: string;
 
   @ApiProperty()
-  update_at: Date;
+  updated_at: Date;
 
   @ApiProperty()
-  create_at: Date;
+  created_at: Date;
 
   @ApiProperty()
   user_update: string;

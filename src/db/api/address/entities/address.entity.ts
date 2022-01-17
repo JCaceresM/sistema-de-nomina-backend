@@ -2,8 +2,7 @@ import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateCol
 @Entity('address')
 export class AddressEntity {
 
-    @PrimaryGeneratedColumn('uuid')
-    private id: string;
+    @PrimaryGeneratedColumn()    private id: number;
   
     @Column({ type: 'text', unique: true })
     private street: string;
@@ -18,10 +17,10 @@ export class AddressEntity {
     private province: string;
 
     @Column({ type: 'text', unique: false })
-    private owner_ref: string;
+    private municipalities: string;
 
     @Column({ type: 'text', unique: false })
-    private region: string;
+    private sector: string;
   
    
   
@@ -29,10 +28,10 @@ export class AddressEntity {
     private status: string;
   
     @UpdateDateColumn({ type: 'timestamp',nullable: true })
-    private update_at: Date;
+    private updated_at: Date;
   
     @CreateDateColumn({ type: 'timestamp', nullable: false })
-    private create_at: Date;
+    private created_at: Date;
   
     @Column({ type: 'text',nullable: true })
     private user_update: string;

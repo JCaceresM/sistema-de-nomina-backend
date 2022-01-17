@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BadRequest } from 'src/common/utils/responses/error.helper';
-import { Repository } from 'typeorm';
+import { createQueryBuilder, Repository } from 'typeorm';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { EmployeeEntity } from './entities/employee.entity';
+import { Not } from 'typeorm';
+import { PaginationType } from 'src/common/types/general';
+import { paginatedQuery } from 'src/common/utils/responses/pagination';
+import { QueryParams } from 'src/common/types/response.type';
 
 @Injectable()
 export class EmployeesRepositoryService {
@@ -16,8 +20,12 @@ export class EmployeesRepositoryService {
     return this.employeesRepository.save(createEmployeeDto);
   }
 
-  findAll() {
-    return this.employeesRepository.find();
+  async findAll(queryParams: QueryParams) {
+    const statement = `
+      SELECT * FROM employee  WHERE status != 'I'
+ `;
+    const [data, meta] = await paginatedQuery(statement, queryParams);
+    return { data, meta };
   }
 
   findOne(id: number) {

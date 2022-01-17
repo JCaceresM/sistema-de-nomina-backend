@@ -22,9 +22,11 @@ export class EmployeesController {
     return this.employeesRepositoryService.create(createEmployeeDto);
   }
 
-  @Get()
-  findAll() {
-    return this.employeesRepositoryService.findAll();
+  @Get('all')
+  async findAll(@Param('take') take: number,@Param('skip') skip: number) {
+    // console.log( this.employeesRepositoryService.findAll({take,skip}));
+    
+    return this.employeesRepositoryService.findAll({page:take,size:skip});
   }
 
   @Get(':id')

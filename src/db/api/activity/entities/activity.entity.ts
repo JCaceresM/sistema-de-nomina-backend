@@ -2,19 +2,20 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { EmployeeEntity } from '../../employees/entities/employee.entity';
 @Entity('activity')
 export class ActivityEntity {
-  @PrimaryGeneratedColumn('uuid')
-  private id: string;
+  @PrimaryGeneratedColumn('identity')
+  private id: number;
 
   @Column({ type: 'text',nullable: true })
   private description: string;
+  
+  @Column({ type: 'text',nullable: true })
+  private route: string;
 
   @Column({ type: 'text',nullable: true })
   private parent: string;
@@ -22,19 +23,18 @@ export class ActivityEntity {
   @Column({ type: 'text', unique: false })
   private status: string;
 
+  @Column({ type: 'text', unique: false })
+  private id_actividad: string;
+
   @UpdateDateColumn({ type: 'timestamp',nullable: true })
-  private update_at: Date;
+  private updated_at: Date;
 
   @CreateDateColumn({ type: 'timestamp', nullable: false })
-  private create_at: Date;
+  private created_at: Date;
 
   @Column({ type: 'text',nullable: true })
   private user_update: string;
 
   @Column({ type: 'text',nullable: true })
   private user_insert: string;
-
-  @ManyToOne(() => EmployeeEntity, (employee) => employee.contactParent)
-  @JoinColumn({ name: "employee_id" })
-  employee_id: EmployeeEntity;
 }

@@ -4,13 +4,11 @@ import { AppModule } from './app.module';
 import * as helmet from 'helmet';
 import * as bodyParser from 'body-parser';
 import { API_PREFIX } from './common/constants/global/globalContansts';
-import { generateTypeormConfigFile } from './scripts';
 import { ConfigService } from '@nestjs/config';
 import { initSwagger } from './app.swagger';
 import { AppConfigService } from './config/getterConfig.service';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import setDefaultUser from './scripts/setDefaultUser';
-
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -22,11 +20,10 @@ async function bootstrap() {
   app.enableCors();
   app.use(helmet());
   app.useGlobalPipes(new ValidationPipe());
-
-
+  
+  
   initSwagger(app)
   
-  generateTypeormConfigFile(config, appConfig);
   setDefaultUser( config, appConfig);
   app.use(bodyParser.json({limit: '50mb'}));
   app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));

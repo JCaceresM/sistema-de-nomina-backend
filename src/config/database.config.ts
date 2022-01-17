@@ -2,7 +2,7 @@ import { registerAs } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { join } from 'path';
 
-function typeormModuleOptions(): TypeOrmModuleOptions {
+export function typeormModuleOptions(): TypeOrmModuleOptions {
   return {
     type: 'postgres',
     host: process.env.HOST,
@@ -36,6 +36,3 @@ function typeormModuleOptions(): TypeOrmModuleOptions {
   }
 }
 
-export default registerAs('database', () => ({
-  config: typeormModuleOptions()
-}));

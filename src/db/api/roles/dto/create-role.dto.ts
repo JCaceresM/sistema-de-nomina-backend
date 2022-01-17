@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateRoleDto {
   @ApiProperty()
-  private id: string;
+  private id: number;
 
   @ApiProperty()
   rol_name: string;
@@ -11,16 +11,16 @@ export class CreateRoleDto {
   type: string;
 
   @ApiProperty()
-  company_id: string;
+  company_id: number;
 
   @ApiProperty()
   status: string;
 
   @ApiProperty()
-  update_at: Date;
+  updated_at: Date;
 
   @ApiProperty()
-  create_at: Date;
+  created_at: Date;
 
   @ApiProperty()
   user_update: string;

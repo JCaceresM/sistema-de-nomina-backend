@@ -1,0 +1,160 @@
+[
+    {
+        "id_actividad":"01",
+        "description": "Nomina Fija",
+        "parent": null,
+        "status": "A",
+        "user_insert": "default"
+        
+    },
+    {
+        "id_actividad":"01-01",
+        "description": "Consulta Nomina",
+        "parent": "01",
+        "status": "A",
+        "user_insert": "default",
+        "route":"fixed_payroll/consulting"
+    },
+    {
+        "id_actividad":"01-02",
+        "description": "Consultar empleados",
+        "parent": "01",
+        "status": "A",
+        "user_insert": "default",
+        "route":"fixed_payroll/employees"
+
+    },
+    {
+        "id_actividad":"01-03",
+        "description": "Consultar descuento",
+        "parent": "01",
+        "status": "A",
+        "user_insert": "default",
+        "route":"fixed_payroll/cash_discount"
+
+    },
+    {
+        "id_actividad":"01-04",
+        "description": "Novedades",
+        "parent": "01",
+        "status": "A",
+        "user_insert": "default",
+        "route":"fixed_payroll/payment_news"
+
+    },
+    {
+        "id_actividad":"01-05",
+        "description": "Verificar / Registar",
+        "parent": "01",
+        "status": "A",
+        "user_insert": "default",
+        "route":"fixed_payroll/check_register"
+
+    },
+    {
+        "id_actividad":"01-06",
+        "description": "Aprobar",
+        "parent": "01",
+        "status": "A",
+        "user_insert": "default",
+        "route":"fixed_payroll/approve"
+
+    },
+    {
+        "id_actividad":"01-07",
+        "description": "Autorizar",
+        "parent": "01",
+        "status": "A",
+        "user_insert": "default",
+        "route":"fixed_payroll/authorization"
+
+    },
+    {
+        "id_actividad":"01-08",
+        "description": "Reversar Nomina registrada",
+        "parent": "01",
+        "status": "A",
+        "user_insert": "default",
+        "route":"fixed_payroll/revert"
+
+    },
+    {
+        "id_actividad":"06",
+        "description": "configuracion",
+        "parent": null,
+        "status": "A",
+        "user_insert": "default",
+        "route":""
+
+    },
+    {
+        "id_actividad":"06-01",
+        "description": "Empleados",
+        "parent": "06",
+        "status": "A",
+        "user_insert": "default",
+        "route":""
+
+    },
+    {
+        "id_actividad":"06-01-01",
+        "description": "Registrar / Consultar",
+        "parent": "06-01",
+        "status": "A",
+        "user_insert": "default",
+        "route":"config/employee/register"
+
+    },
+    {
+        "id_actividad":"06-02",
+        "description": "Usuarios",
+        "parent": "06",
+        "status": "A",
+        "user_insert": "default",
+        "route":""
+
+    },
+    {
+        "id_actividad":"06-02-01",
+        "description": "Registrar / Consultar",
+        "parent": "06-02",
+        "status": "A",
+        "user_insert": "default",
+        "route":"config/users/register"
+    },
+    {
+        "id_actividad":"06-03",
+        "description": "Departamentos",
+        "parent": "06",
+        "status": "A",
+        "user_insert": "default",
+        "route":""
+
+    },
+    {
+        "id_actividad":"06-03-01",
+        "description": "Registrar / Consultar",
+        "parent": "06-03",
+        "status": "A",
+        "user_insert": "default",
+        "route":"config/departments/register"
+    }
+    ,
+    {
+        "id_actividad":"06-04",
+        "description": "Posiciones de empleados",
+        "parent": "06",
+        "status": "A",
+        "user_insert": "default",
+        "route":""
+
+    },
+    {
+        "id_actividad":"06-04-01",
+        "description": "Registrar / Consultar",
+        "parent": "06-04",
+        "status": "A",
+        "user_insert": "default",
+        "route":"config/positions/register"
+    }
+]

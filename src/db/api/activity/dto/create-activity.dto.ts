@@ -1,30 +1,33 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { EmployeeEntity } from "../../employees/entities/employee.entity";
+import { ApiProperty } from '@nestjs/swagger';
+import { EmployeeEntity } from '../../employees/entities/employee.entity';
 
 export class CreateActivityDto {
-    @ApiProperty()
-     id: string;
-  
-    @ApiProperty()
-     description: string;
-  
-    @ApiProperty()
-     parent: string;
+  @ApiProperty()
+ id: number;
 
-    @ApiProperty()
-    status: string;
-  
-    @ApiProperty()
-    email: string;
-  
-    @ApiProperty()
-    update_at: Date;
-  
-    @ApiProperty()
-    create_at: Date;
-  
-    @ApiProperty()
-    user_update: string;
-    
-    employee_id: EmployeeEntity;
+  @ApiProperty()
+  description: string;
+
+  @ApiProperty()
+  route: string;
+
+  @ApiProperty()
+  parent: string;
+
+  @ApiProperty()
+  status: string;
+
+  @ApiProperty()
+  email: string;
+
+  @ApiProperty()
+  updated_at: Date;
+
+  @ApiProperty()
+  created_at: Date;
+
+  @ApiProperty()
+  user_update: string;
+
+  employee_id: EmployeeEntity;
 }

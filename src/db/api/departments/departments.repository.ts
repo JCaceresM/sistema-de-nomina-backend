@@ -16,8 +16,8 @@ export class DepartmentRepositoryService {
     return this.departmentRepository.save(createDepartmentDto);
   }
 
-  findAll() {
-    return this.departmentRepository.find();
+  async findAll() {
+    return {data:await this.departmentRepository.find()}
   }
 
   findOne(id: number) {

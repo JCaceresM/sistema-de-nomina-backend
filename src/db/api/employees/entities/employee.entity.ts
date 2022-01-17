@@ -8,7 +8,6 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
-  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -16,13 +15,13 @@ import {
 import * as bcrypt from 'bcrypt';
 import { DepartmentEntity } from '../../departments/entities/department.entity';
 import { RoleEntity } from '../../roles/entities/role.entity';
-import { ContactParentEntity } from '../../contact-parent/entities/contact-parent.entity';
 import { ActivityEntity } from '../../activity/entities/activity.entity';
-import { PaysheetEntity } from '../../paysheet/entities/paysheet.entity';
+import { PayrollEntity } from '../../payroll/entities/payroll.entity';
+import { PositionEntity } from '../../positions/entities/position.entity';
 @Entity('employee')
 export class EmployeeEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({ type: 'text', unique: true })
   document_id: string;
@@ -36,66 +35,106 @@ export class EmployeeEntity {
   @Column({ type: 'text', unique: false })
   password: string;
 
-  @Column({ type: 'text', unique: false,nullable: true })
+  @Column({ type: 'text', unique: false, nullable: true })
   fist_name: string;
 
-  @Column({ type: 'text', unique: false,nullable: true })
+  @Column({ type: 'text', unique: false, nullable: true })
   last_name: string;
 
-  @Column({ type: 'text', unique: false,nullable: true })
+  @Column({ type: 'text', unique: false, nullable: true })
   gender: string;
 
-  @Column({ type: 'integer', unique: false,nullable: true })
+  @Column({ type: 'integer', unique: false, nullable: true })
   age: number;
 
-  @Column({ type: 'text', unique: false,nullable: true })
+  @Column({ type: 'text', unique: false, nullable: true })
   marital_status: string;
 
   @Column({ type: 'text', unique: false })
   status: string;
 
-  @Column({ type: 'timestamp', unique: false,nullable: true })
+  @Column({ type: 'timestamp', unique: false, nullable: true })
   born_date: Date;
 
-  @Column({ type: 'timestamp', unique: false,nullable: true })
+  @Column({ type: 'timestamp', unique: false, nullable: true })
   hire_date: Date;
 
-  @Column({ type: 'text', unique: false,nullable: true })
+  @Column({ type: 'text', unique: false, nullable: true })
   nss: string;
 
   @ManyToOne(() => DepartmentEntity, (department) => department.employees)
-  @JoinColumn({ name: "department_id" })
   department_id: DepartmentEntity;
 
-  @Column({ type: 'text', unique: false,nullable: true })
-  nomina_id: string;
+  @Column({ type: 'text', unique: false, nullable: true })
+  fax: string;
 
-  @UpdateDateColumn({ type: 'timestamp',nullable: true })
-  update_at: Date;
+  @Column({ type: 'text', unique: false, nullable: true })
+  tell: string;
 
-  @CreateDateColumn({ type: 'timestamp', nullable: false })
-  create_at: Date;
+  @Column({ type: 'text', unique: false, nullable: true })
+  cell: string;
+
+  @Column({ type: 'text', unique: false, nullable: true })
+  email: string;
+
+  @Column({ type: 'integer', unique: false })
+  company_id: number;
+
+  @Column({ type: 'text', unique: true,nullable: true })
+   full_name_emergency_contact: string;
 
   @Column({ type: 'text',nullable: true })
+   cell_emergency_contact: string;
+
+  @Column({ type: 'text',nullable: true })
+   tell_emergency_contact: string;
+
+  @Column({ type: 'text',nullable: true })
+   relation_emergency_contact: string;
+
+  @Column({ type: 'text',nullable: true })
+   payment_method: string;
+
+  @Column({ type: 'text',nullable: true })
+   blond_type: string;
+
+  @Column({ type: 'timestamp', nullable: true })
+  relinquishment: Date;
+
+  @Column({ type: 'text', nullable: true })
+  relinquishment_detail: string;
+
+  @UpdateDateColumn({ type: 'timestamp', nullable: true })
+  updated_at: Date;
+
+  @CreateDateColumn({ type: 'timestamp', nullable: false })
+  created_at: Date;
+
+  @Column({ type: 'text', nullable: true })
   user_update: string;
 
-  @Column({ type: 'text',nullable: true  })
+  @Column({ type: 'text', nullable: true })
+  working_time: string;
+
+  @Column({ type: 'text', nullable: true })
   user_insert: string;
 
   @ManyToMany(() => RoleEntity)
   @JoinTable()
-  roles: RoleEntity[]
+  roles: RoleEntity[];
 
-  @OneToMany(() => ContactParentEntity, contactParent => contactParent.employee_id)
-  contactParent: ContactParentEntity[];
 
-  @OneToMany(() => ActivityEntity, activity => activity.employee_id)
+  @ManyToMany(() => ActivityEntity)
+  @JoinTable()
   activities: ActivityEntity[];
 
-  @OneToOne(() => PaysheetEntity)
-  @JoinColumn({ name: "paysheet_id" })
-  paysheet_id: PaysheetEntity; 
+  @ManyToOne(() => PositionEntity, (positionEntity) => positionEntity.employee_id)
+  @JoinColumn({ name: "position_id" })
+  position_id: PositionEntity[];
 
+  @OneToOne(() => PayrollEntity)
+  @JoinColumn({ name:'payroll_id'})
+  payroll_id: PayrollEntity;
 
   @BeforeInsert()
   @BeforeUpdate()

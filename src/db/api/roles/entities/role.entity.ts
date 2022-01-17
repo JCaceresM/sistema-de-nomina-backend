@@ -10,8 +10,7 @@ import {
 import * as bcrypt from 'bcrypt';
 @Entity('roles')
 export class RoleEntity {
-  @PrimaryGeneratedColumn('uuid')
-  private id: string;
+  @PrimaryGeneratedColumn()  private id: number;
 
   @Column({ type: 'text', unique: true })
   private rol_name: string;
@@ -20,16 +19,16 @@ export class RoleEntity {
   private type: string;
 
   @Column({ type: 'text' })
-  private company_id: string;
+  private company_id: number;
 
   @Column({ type: 'text', unique: false })
   private status: string;
 
   @UpdateDateColumn({ type: 'timestamp',nullable: true })
-  private update_at: Date;
+  private updated_at: Date;
 
   @CreateDateColumn({ type: 'timestamp', nullable: false })
-  private create_at: Date;
+  private created_at: Date;
 
   @Column({ type: 'text',nullable: true })
   private user_update: string;
