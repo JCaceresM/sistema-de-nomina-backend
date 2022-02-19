@@ -21,7 +21,7 @@ export class DepartmentEntity {
   @Column({ type: 'text', unique: false })
   private location: string;
 
-  @Column({ type: 'integer' })
+  @Column({ type: 'real', nullable: true })
   private budget: number;
 
 

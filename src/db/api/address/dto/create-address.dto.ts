@@ -1,32 +1,28 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { EmployeeEntity } from '../../employees/entities/employee.entity';
 
 export class CreateAddressDto {
   @ApiProperty()
- id: number;
+ id?: number;
 
   @ApiProperty()
   street: string;
 
   @ApiProperty()
-  city: string;
+  employee_id: number;
 
   @ApiProperty()
-  postal_code: string;
+  province: number;
 
   @ApiProperty()
-  province: string;
+  municipality: number;
 
   @ApiProperty()
-  owner_ref: string;
-
-  @ApiProperty()
-  region: string;
+  sector: number;
 
   @ApiProperty()
   status: string;
 
-  @ApiProperty()
-  email: string;
 
   @ApiProperty()
   updated_at: Date;

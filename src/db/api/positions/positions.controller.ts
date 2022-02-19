@@ -28,7 +28,7 @@ export class PositionsController {
   findAll() {    
     return this.positionsRepositoryService.findAll();
   }
-  @Get('all_department')
+  @Get('department')
   findAllInDepartment(@Query('department_id') department_id: number) {    
     return this.positionsRepositoryService.findAllInDepartment(department_id);
   }

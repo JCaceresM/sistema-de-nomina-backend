@@ -7,8 +7,6 @@ export class CreatePayrollDto {
   @ApiProperty()
    id: number;
 
-  @ApiProperty()
-  salary: number;
 
   @ApiProperty()
   company_id: number;

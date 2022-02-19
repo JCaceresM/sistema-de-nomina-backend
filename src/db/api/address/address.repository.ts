@@ -12,8 +12,8 @@ export class AddressRepositoryService {
     @InjectRepository(AddressEntity)
     private addressRepository: Repository<AddressEntity>,
   ) {}
-  create(createAddressDto: CreateAddressDto) {
-    return this.addressRepository.save(createAddressDto);
+  async create(createAddressDto: CreateAddressDto) {
+    return await this.addressRepository.save(createAddressDto);
   }
 
   findAll() {

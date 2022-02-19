@@ -10,6 +10,11 @@ import { PayrollNewsModule } from './api/payroll-news/payroll-news.module';
 import { BankAccountsModule } from './api/bank-accounts/bank-accounts.module';
 import { PositionsModule } from './api/positions/positions.module';
 import { ParametersModule } from './api/parameters/parameters.module';
+import { PayrollNewsRecordModule } from './api/payroll-news-record/payroll-news-record.module';
+import { PayrollNewsRelationModule } from './api/payroll-news-relation/payroll-news-relation.module';
+import { PayrollRecordModule } from './api/payroll-record/payroll-record.module';
+import { PayrollRecordUsersRelationModule } from './api/payroll-record-users-relation/payroll-record-users-relation.module';
+import { PayrollRecordDetailsModule } from './api/payroll-record-details/payroll-record-details.module';
 
 @Module({
   imports: [
@@ -24,6 +29,8 @@ import { ParametersModule } from './api/parameters/parameters.module';
     BankAccountsModule,
     PositionsModule,
     ParametersModule,
+    PayrollNewsRecordModule,
+    PayrollNewsRelationModule,PayrollRecordModule, PayrollRecordUsersRelationModule, PayrollRecordDetailsModule
   ],
   exports: [
     EmployeesModule,
@@ -34,7 +41,7 @@ import { ParametersModule } from './api/parameters/parameters.module';
     ActivityModule,
     payrollModule,
     PayrollNewsModule,
-    BankAccountsModule,
+    BankAccountsModule,PayrollRecordModule,
     PositionsModule,
   ],
 })

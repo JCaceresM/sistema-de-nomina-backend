@@ -7,26 +7,28 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { SelectConditionType } from 'src/common/utils/responses/condition.helper';
+import { CreateAddressDto } from '../address/dto/create-address.dto';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { EmployeesRepositoryService } from './employees.repository';
+import { EmployeesService } from './employees.service';
 
 @Controller('employees')
 export class EmployeesController {
   constructor(
     private readonly employeesRepositoryService: EmployeesRepositoryService,
+    private readonly employeesService: EmployeesService,
   ) {}
 
   @Post()
-  create(@Body() createEmployeeDto: CreateEmployeeDto) {
-    return this.employeesRepositoryService.create(createEmployeeDto);
+  create(@Body() record: CreateEmployeeDto & CreateAddressDto) {
+    return this.employeesService.createEmployee(record);
   }
 
-  @Get('all')
-  async findAll(@Param('take') take: number,@Param('skip') skip: number) {
-    // console.log( this.employeesRepositoryService.findAll({take,skip}));
-    
-    return this.employeesRepositoryService.findAll({page:take,size:skip});
+  @Post('collection')
+  async findAll(@Param('take') take: number,@Param('skip') skip: number, @Body() params: {searchConditions:SelectConditionType[]}) {    
+    return this.employeesService.find(params.searchConditions,{page:take,size:skip});
   }
 
   @Get(':id')

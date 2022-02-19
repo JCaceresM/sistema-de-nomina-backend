@@ -26,7 +26,6 @@ export class AppModule {
   static port: number | string;
   constructor(private readonly _configService: AppConfigService) {
     AppModule.port = this._configService.get('PORT');
-    console.log( {...typeormModuleOptions()},);
     
   }
 }

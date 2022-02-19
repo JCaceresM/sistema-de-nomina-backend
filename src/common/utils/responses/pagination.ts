@@ -18,8 +18,6 @@ export const paginatedQuery = async <T>(
     page: pageNumber = DEFAULT_PAGINATION_PAGE_NUMBER,
     size: pageSize = DEFAULT_PAGINATION_PAGE_SIZE,
   } = queryParams;
-  console.log(pageNumber, pageSize);
-
   const startPosition = pageSize * (pageNumber - 1);
   const finishPosition = startPosition + pageSize;
   const mainQuerySql =

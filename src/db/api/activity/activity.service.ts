@@ -26,9 +26,6 @@ export class ActivityService {
           `;
     const initial =( await getConnection().query(statement2)).map((res)=> res.id_actividad);
     const data = await getConnection().query(statement);
-    // console.log(initial,"initial");
-    // console.log(data,"data");
-    
     return formatMenuOptions(data, initial);
   }
 }

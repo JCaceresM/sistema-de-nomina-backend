@@ -8,6 +8,7 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -18,25 +19,27 @@ import { RoleEntity } from '../../roles/entities/role.entity';
 import { ActivityEntity } from '../../activity/entities/activity.entity';
 import { PayrollEntity } from '../../payroll/entities/payroll.entity';
 import { PositionEntity } from '../../positions/entities/position.entity';
+import { AddressEntity } from '../../address/entities/address.entity';
+import { PayrollRecordDetailEntity } from '../../payroll-record-details/entities/payroll-record-detail.entity';
 @Entity('employee')
 export class EmployeeEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'text', unique: true })
+  @Column({ type: 'text', unique: true, })
   document_id: string;
 
-  @Column({ type: 'text', unique: false })
+  @Column({ type: 'text', unique: false,nullable: true })
   user_name: string;
 
-  @Column({ type: 'text', unique: true })
+  @Column({ type: 'text', unique: true,nullable: true })
   email_login: string;
 
-  @Column({ type: 'text', unique: false })
+  @Column({ type: 'text', unique: false,nullable: true })
   password: string;
 
   @Column({ type: 'text', unique: false, nullable: true })
-  fist_name: string;
+  first_name: string;
 
   @Column({ type: 'text', unique: false, nullable: true })
   last_name: string;
@@ -63,6 +66,7 @@ export class EmployeeEntity {
   nss: string;
 
   @ManyToOne(() => DepartmentEntity, (department) => department.employees)
+  @JoinColumn({name: 'department_id'})
   department_id: DepartmentEntity;
 
   @Column({ type: 'text', unique: false, nullable: true })
@@ -80,7 +84,10 @@ export class EmployeeEntity {
   @Column({ type: 'integer', unique: false })
   company_id: number;
 
-  @Column({ type: 'text', unique: true,nullable: true })
+  @Column({ type: 'real', unique: false, nullable: true })
+  salary: number;
+
+  @Column({ type: 'text', unique: false,nullable: true })
    full_name_emergency_contact: string;
 
   @Column({ type: 'text',nullable: true })
@@ -135,6 +142,12 @@ export class EmployeeEntity {
   @OneToOne(() => PayrollEntity)
   @JoinColumn({ name:'payroll_id'})
   payroll_id: PayrollEntity;
+
+  @OneToMany(() => AddressEntity, address => address.employee_id)
+  address: AddressEntity[];
+
+  @OneToMany(() => PayrollRecordDetailEntity, address => address.employee_id)
+  payrollRecordDetails: PayrollRecordDetailEntity[];
 
   @BeforeInsert()
   @BeforeUpdate()

@@ -10,10 +10,23 @@ import {
 import { PayrollEntity } from '../../payroll/entities/payroll.entity';
 @Entity('payroll_news')
 export class PayrollNewsEntity {
-  @PrimaryGeneratedColumn()  private id: number;
+  @PrimaryGeneratedColumn() 
+  private id: number;
 
-  @Column({ type: 'integer', unique: false })
-  private amount: string;
+  @Column({ type: 'real', unique: false })
+  private amount: number;
+
+  @Column({ type: 'text', unique: false })
+  private type: number;
+  
+  @Column({ type: 'text', unique: false })
+  private description: string;
+
+  @Column({ type: 'text', unique: false })
+  private name: string;
+
+  @Column({ type: 'text', unique: false })
+  private operation: number;
 
   @Column({ type: 'text', unique: false })
   private company_id: number;

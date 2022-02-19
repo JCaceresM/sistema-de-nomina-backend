@@ -80,7 +80,7 @@
     },
     {
         "id_actividad":"06",
-        "description": "configuracion",
+        "description": "Administración",
         "parent": null,
         "status": "A",
         "user_insert": "default",
@@ -156,5 +156,23 @@
         "status": "A",
         "user_insert": "default",
         "route":"config/positions/register"
+    }
+    ,
+    {
+        "id_actividad":"06-05",
+        "description": "Nomina",
+        "parent": "06",
+        "status": "A",
+        "user_insert": "default",
+        "route":""
+
+    },
+    {
+        "id_actividad":"06-05-01",
+        "description": "Registrar / Consultar",
+        "parent": "06-05",
+        "status": "A",
+        "user_insert": "default",
+        "route":"config/payroll/register"
     }
 ]

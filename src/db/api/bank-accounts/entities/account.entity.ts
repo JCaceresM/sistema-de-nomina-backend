@@ -24,7 +24,7 @@ export class BankAccountEntity {
   @Column({ type: 'text', unique: false })
   operation: string;
 
-  @Column({ type: 'integer', unique: false })
+  @Column({ type: 'real', unique: false })
   balance: number;
 
   @Column({ type: 'integer', unique: false })
@@ -42,7 +42,6 @@ export class BankAccountEntity {
   @Column({ type: 'text', nullable: true })
   user_insert: string;
 
-  @ManyToOne(() => PayrollEntity, (payrollEntity) => payrollEntity.disbursement)
-  @JoinColumn({ name: "payroll_id" })
-  payroll_id: PayrollEntity[];
+  @OneToMany(() => PayrollEntity, (payrollEntity) => payrollEntity.bank_account_id)
+  disbursement: PayrollEntity[];
 }

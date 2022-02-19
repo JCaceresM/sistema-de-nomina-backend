@@ -5,7 +5,7 @@ import {
 } from '../../constants/responses/error.constants';
 
 export const BadRequest = ({
-  message = 'empty',
+  message = 'Not Ok',
   body = {},
   status = HttpStatus.BAD_REQUEST,
 }: BadRequestType) =>

@@ -25,10 +25,10 @@ export class PositionEntity {
   @Column({ type: 'text' })
   private name: string;
 
-  @Column({ type: 'integer' })
+  @Column({ type: 'real' })
   private max_salary: number;
 
-  @Column({ type: 'integer' })
+  @Column({ type: 'real' })
   private min_salary: number;
 
   @UpdateDateColumn({ type: 'timestamp',nullable: true })

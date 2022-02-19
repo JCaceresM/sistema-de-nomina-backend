@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { ActivityEntity } from '../../activity/entities/activity.entity';
+import { AddressEntity } from '../../address/entities/address.entity';
 import { DepartmentEntity } from '../../departments/entities/department.entity';
 import { PayrollEntity } from '../../payroll/entities/payroll.entity';
 import { PositionEntity } from '../../positions/entities/position.entity';
@@ -13,6 +14,9 @@ export class CreateEmployeeDto {
   document_id: string;
 
   @ApiProperty()
+  address: AddressEntity[];
+
+  @ApiProperty()
   user_name: string;
 
   @ApiProperty()
@@ -22,7 +26,7 @@ export class CreateEmployeeDto {
   password: string;
 
   @ApiProperty()
-  fist_name: string;
+  first_name: string;
 
   @ApiProperty()
   last_name: string;

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as Provinces from '../seeders/Provinces.json'
-import* as Municipalities from '../seeders/Municipalities.json'
+import * as Municipalities from '../seeders/Municipalities.json'
 import * as Sector from '../seeders/Sectors.json'
 
 @Injectable()
