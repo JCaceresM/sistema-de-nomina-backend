@@ -51,8 +51,6 @@ export const searchConditionQuery = async (
     tableName,
     tableNameSort,
   );
-  console.log(conditions, 'dd');
-
   conditions.forEach((condition) => {
     query += searchCondition(condition.operator, condition);
   });

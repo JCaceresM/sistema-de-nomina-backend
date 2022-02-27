@@ -1,16 +1,20 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppConfigService } from './getterConfig.service';
+import configuration from './database.config';
 
 @Module({
-   imports: [ ConfigModule.forRoot({
+  imports: [
+    ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `.env.${
         process.env.NODE_ENV ? process.env.NODE_ENV : 'development'
       }`,
       cache: true,
-    }),],
-   providers: [ConfigService, AppConfigService],
-   exports: [ConfigService, AppConfigService],
+      load: [configuration],
+    }),
+  ],
+  providers: [ConfigService, AppConfigService],
+  exports: [ConfigService, AppConfigService],
 })
-export class ConfigDBModule {}
+export class AppConfigModule {}

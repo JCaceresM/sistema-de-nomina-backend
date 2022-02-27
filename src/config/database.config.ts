@@ -36,3 +36,6 @@ export function typeormModuleOptions(): TypeOrmModuleOptions {
   }
 }
 
+export default registerAs('database', () => ({
+  config: typeormModuleOptions()
+}));

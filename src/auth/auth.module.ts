@@ -2,7 +2,7 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { ConfigDBModule } from 'src/config/getterConfig.module';
+import { AppConfigModule } from 'src/config/getterConfig.module';
 import { AppConfigService } from 'src/config/getterConfig.service';
 import { EmployeesModule } from 'src/db/api/employees/employees.module';
 import { AuthController } from './auth.controller';
@@ -14,11 +14,11 @@ import { LocalStrategy } from './strategies/local.strategy';
 
 @Module({
   imports: [
-    ConfigDBModule,
+    AppConfigModule,
     EmployeesModule,
     PassportModule,
     JwtModule.registerAsync({
-      imports: [ConfigDBModule],
+      imports: [AppConfigModule],
       useFactory: async (_appConfigService: AppConfigService) => {
       
         

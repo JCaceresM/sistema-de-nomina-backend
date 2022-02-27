@@ -65,9 +65,7 @@ GROUP BY emp.id, d."name"
    
  
   
-        `;
-        console.log(statement);
-        
+        `;        
         const [data, meta]:any = await paginatedQuery(statement, queryParams);
  
     return {data:data.map((item)=> {
