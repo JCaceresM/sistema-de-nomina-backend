@@ -6,17 +6,17 @@ import {
 } from 'typeorm';
 export class CommonEntity {
   @PrimaryGeneratedColumn()
-  private id: number;
+   id: number;
 
   @UpdateDateColumn({ type: 'timestamp', nullable: true })
-  private updated_at: Date;
+   updated_at: Date;
 
   @CreateDateColumn({ type: 'timestamp', nullable: false })
-  private created_at: Date;
+   created_at: Date;
 
   @Column({ type: 'text', nullable: true })
-  private user_update: string;
+   user_update: string;
 
   @Column({ type: 'text', nullable: true })
-  private user_insert: string;
+   user_insert: string;
 }

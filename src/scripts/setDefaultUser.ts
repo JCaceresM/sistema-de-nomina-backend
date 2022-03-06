@@ -28,6 +28,8 @@ const setDefaultUser = async (config: ConfigService, appConfigService: AppConfig
   
   if (!defaultCompany.length) {
     let company = JSON.parse(config.get<string>('DEFAULT_COMPANY'));
+    console.log(company);
+    
     company = companyRepository.create({
       status: 'A',
       foundation_date: company.foundation_date,
