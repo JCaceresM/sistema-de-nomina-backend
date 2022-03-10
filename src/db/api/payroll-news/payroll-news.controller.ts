@@ -3,6 +3,7 @@ import { PayrollNewsRepositoryService } from './payroll-news.repository';
 import { payrollNewsService } from './payroll-news.service';
 import { PayrollNewsDiscountDto } from './dto/create-payroll-news.dto';
 import { UpdatePayrollNewsDiscountDto } from './dto/update-payroll-news.dto';
+import { SelectConditionType } from 'src/common/utils/responses/condition.helper';
 
 @Controller('cash-discount')
 export class PayrollNewsController {
@@ -13,9 +14,9 @@ export class PayrollNewsController {
     return this.PayrollNewsRepositoryService.create(createCashDiscountDto);
   }
 
-  @Get()
-  findAll() {
-    return this.PayrollNewsRepositoryService.findAll();
+  @Post('collection')
+  async findAll(@Param('take') take: number,@Param('skip') skip: number, @Body() body: {searchConditions:SelectConditionType[]}) {    
+    return this.PayrollNewsRepositoryService.find(body.searchConditions,{page:take,size:skip});
   }
 
   @Get(':id')

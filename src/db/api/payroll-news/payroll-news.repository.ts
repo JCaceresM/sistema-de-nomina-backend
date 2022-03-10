@@ -1,6 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { QueryParams } from 'src/common/types/response.type';
+import {
+  searchConditionQuery,
+  SelectConditionType,
+} from 'src/common/utils/responses/condition.helper';
 import { BadRequest } from 'src/common/utils/responses/error.helper';
+import { paginatedQuery } from 'src/common/utils/responses/pagination';
 import { Repository } from 'typeorm';
 import { AddressEntity } from '../address/entities/address.entity';
 import { PayrollNewsDiscountDto } from './dto/create-payroll-news.dto';
@@ -26,10 +32,7 @@ export class PayrollNewsRepositoryService {
   }
 
   async update(id: number, updateEmployeeDto: UpdatePayrollNewsDiscountDto) {
-    const data = await this.PayrollNewsRepository.update(
-      id,
-      updateEmployeeDto,
-    );
+    const data = await this.PayrollNewsRepository.update(id, updateEmployeeDto);
     if (data.affected) {
       return { ...data, dataUpdated: await this.findOne(id) };
     }
@@ -48,5 +51,22 @@ export class PayrollNewsRepositoryService {
     throw BadRequest({
       message: `unable to delete record with id ${id}`,
     });
+  }
+  async find(conditions: SelectConditionType[] = [], queryParams: QueryParams) {
+    const statement = `
+        SELECT prn.id, prn.amount, prn."type", prn.description, prn."name", prn.operation, 
+                prn.company_id, prn.status, prn.updated_at, prn.created_at, prn.user_update, 
+                prn.user_insert, prn.payroll_id 
+      FROM payroll_news prn
+
+      where  1=1 ${await searchConditionQuery(conditions, 'payroll_news', 'prn')}
+
+        `;
+    const [data, meta]: any = await paginatedQuery(statement, queryParams);
+
+    return {
+      data,
+      meta,
+    };
   }
 }
