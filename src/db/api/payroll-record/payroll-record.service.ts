@@ -121,7 +121,8 @@ export class PayrollRecordService {
     const statement = `
     SELECT  pr.id, pr.company_id, pr."name", pr."type", pr.registered_at, pr.description,
             pr.status, pr.updated_at, pr.created_at, pr.user_update, 
-		        pr.user_insert, pr.payroll_id, json_agg(payroll_record_detail) as payroll_record_detail 
+		        pr.user_insert, pr.payroll_id,
+             COALESCE(json_agg(payroll_record_detail) FILTER (WHERE payroll_record_detail.employee_id  IS NOT NULL), '[]') as payroll_record_detail 
 		FROM payroll_record pr
 	  left join lateral 
 	  (

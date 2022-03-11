@@ -50,7 +50,7 @@ export class EmployeesService {
     emp.tell, emp.cell, emp.email, emp.company_id, emp.salary, emp.full_name_emergency_contact, emp.cell_emergency_contact, 
     emp.tell_emergency_contact, emp.relation_emergency_contact, emp.payment_method, emp.blond_type, emp.relinquishment, 
     emp.relinquishment_detail, emp.updated_at, emp.created_at, emp.user_update, emp.working_time, emp.user_insert, emp.department_id, 
-    emp.position_id, emp.payroll_id ,  json_agg(payroll_news) as payroll_news, d."name" as department
+    emp.position_id, emp.payroll_id ,  COALESCE(json_agg(payroll_news) FILTER (WHERE payroll_news.amount  IS NOT NULL), '[]') AS payroll_news , d."name" as department
 FROM employee as emp 
 left join department d on d.id = emp.id
 left join lateral 
