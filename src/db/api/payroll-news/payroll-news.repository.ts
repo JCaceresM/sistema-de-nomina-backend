@@ -9,8 +9,8 @@ import { BadRequest } from 'src/common/utils/responses/error.helper';
 import { paginatedQuery } from 'src/common/utils/responses/pagination';
 import { Repository } from 'typeorm';
 import { AddressEntity } from '../address/entities/address.entity';
-import { PayrollNewsDiscountDto } from './dto/create-payroll-news.dto';
-import { UpdatePayrollNewsDiscountDto } from './dto/update-payroll-news.dto';
+import { PayrollNewsDto } from './dto/create-payroll-news.dto';
+import { UpdatePayrollNewsDto } from './dto/update-payroll-news.dto';
 import { PayrollNewsEntity } from './entities/payroll-news.entity';
 
 @Injectable()
@@ -19,7 +19,7 @@ export class PayrollNewsRepositoryService {
     @InjectRepository(PayrollNewsEntity)
     private PayrollNewsRepository: Repository<PayrollNewsEntity>,
   ) {}
-  create(payrollNewsDiscountDto: PayrollNewsDiscountDto) {
+  create(payrollNewsDiscountDto: Partial<PayrollNewsDto>) {
     return this.PayrollNewsRepository.save(payrollNewsDiscountDto);
   }
 
@@ -31,7 +31,7 @@ export class PayrollNewsRepositoryService {
     return this.PayrollNewsRepository.find({ where: { id } });
   }
 
-  async update(id: number, updateEmployeeDto: UpdatePayrollNewsDiscountDto) {
+  async update(id: number, updateEmployeeDto: UpdatePayrollNewsDto) {
     const data = await this.PayrollNewsRepository.update(id, updateEmployeeDto);
     if (data.affected) {
       return { ...data, dataUpdated: await this.findOne(id) };
@@ -42,7 +42,7 @@ export class PayrollNewsRepositoryService {
   }
 
   async remove(id: number) {
-    const dataToUpdate: Partial<UpdatePayrollNewsDiscountDto> = { status: 'I' };
+    const dataToUpdate: Partial<UpdatePayrollNewsDto> = { status: 'I' };
 
     const data = await this.PayrollNewsRepository.update(id, dataToUpdate);
     if (data.affected) {

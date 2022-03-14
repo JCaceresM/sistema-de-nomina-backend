@@ -7,6 +7,8 @@ import { paginatedQuery } from 'src/common/utils/responses/pagination';
 import { getConnection, Repository } from 'typeorm';
 import { AddressRepositoryService } from '../address/address.repository';
 import { CreateAddressDto } from '../address/dto/create-address.dto';
+import { PayrollNewsRelationEntity } from '../payroll-news-relation/entities/payroll-news-relation.entity';
+import { PayrollNewsRepositoryService } from '../payroll-news/payroll-news.repository';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { EmployeeEntity } from './entities/employee.entity';
@@ -96,4 +98,5 @@ GROUP BY emp.id, d."name"
       message: `unable to update record with id ${id}`,
     });
   }
+  
 }

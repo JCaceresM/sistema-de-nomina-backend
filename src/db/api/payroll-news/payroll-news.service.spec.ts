@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { payrollNewsService } from './payroll-news.service';
+import { PayrollNewsService } from './payroll-news.service';
 
 describe('CashDiscountService', () => {
-  let service: payrollNewsService;
+  let service: PayrollNewsService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [payrollNewsService],
+      providers: [PayrollNewsService],
     }).compile();
 
-    service = module.get<payrollNewsService>(payrollNewsService);
+    service = module.get<PayrollNewsService>(PayrollNewsService);
   });
 
   it('should be defined', () => {

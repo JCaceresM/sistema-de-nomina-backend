@@ -33,13 +33,21 @@ export class payrollController {
   @Post('employees')
   async addEmployees(
     @Body()
-    dataToUpdate: {payroll_id: number, patchData: Array<{ employee_id}>},
+    dataToUpdate: {
+      payroll_id: number;
+      patchData: Array<UpdateEmployeeDto>;
+    },
   ) {
-    return await Promise.all(dataToUpdate.patchData?.map(async (item)=> await this.employeeService.update(
-      +item.employee_id, 
-      {payroll_id: dataToUpdate.payroll_id as unknown as PayrollEntity},
-    )))
-    
+    return await Promise.all(
+      dataToUpdate.patchData?.map(
+        async (item) =>
+          await this.employeeService.update(+item.id, {
+            company_id: item.company_id,
+            user_update: item.user_insert,
+            payroll_id: dataToUpdate.payroll_id as unknown as PayrollEntity,
+          }),
+      ),
+    );
   }
 
   @Post('collection')

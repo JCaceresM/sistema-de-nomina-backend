@@ -6,8 +6,8 @@ import { PayrollNewsEntity } from "../../payroll-news/entities/payroll-news.enti
 @Entity('payroll_news_relation')
 export class PayrollNewsRelationEntity extends CommonEntity{
     @Column({ type: 'integer', unique: false})
-    employee_id: EmployeeEntity;
+    employee_id: number;
 
     @Column({ type: 'integer', unique: false})
-    payroll_news_id: PayrollNewsEntity;
+    payroll_news_id: number;
 }

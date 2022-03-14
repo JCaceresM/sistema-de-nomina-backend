@@ -1,13 +1,24 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { PayrollEntity } from '../../payroll/entities/payroll.entity';
 
-export class PayrollNewsDiscountDto {
+export class PayrollNewsDto {
   @ApiProperty()
  id: number;
 
+  @ApiProperty()
+ type: number;
 
  @ApiProperty()
-  amount: string;
+ description: string;
+
+ @ApiProperty()
+ name: string;
+
+ @ApiProperty()
+ operation: number;
+
+ @ApiProperty()
+  amount: number;
 
  @ApiProperty()
   company_id: number;
