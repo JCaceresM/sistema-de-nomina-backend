@@ -1,23 +1,49 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { SelectConditionType } from 'src/common/utils/responses/condition.helper';
-import {  CreatePayrollDto } from './dto/create-payroll.dto';
+import { UpdateEmployeeDto } from '../employees/dto/update-employee.dto';
+import { EmployeesService } from '../employees/employees.service';
+import { CreatePayrollDto } from './dto/create-payroll.dto';
 import { UpdatePayrollDto } from './dto/update-payrollt.dto';
+import { PayrollEntity } from './entities/payroll.entity';
 import { PayrollRepositoryService } from './payroll.repository';
 import { PayrollService } from './payroll.service';
 
 @Controller('payroll')
 export class payrollController {
-  constructor(private readonly payrollRepositoryService: PayrollRepositoryService, private payrollService:PayrollService) {}
+  constructor(
+    private readonly payrollRepositoryService: PayrollRepositoryService,
+    private readonly employeeService: EmployeesService,
+    private payrollService: PayrollService,
+  ) {}
 
   @Post()
   create(@Body() createPayrollDto: CreatePayrollDto) {
     return this.payrollRepositoryService.create(createPayrollDto);
   }
 
-
+  @Post('employees')
+  async addEmployees(
+    @Body()
+    dataToUpdate: {payroll_id: number, patchData: Array<{ employee_id}>},
+  ) {
+    return await Promise.all(dataToUpdate.patchData?.map(async (item)=> await this.employeeService.update(
+      +item.employee_id, 
+      {payroll_id: dataToUpdate.payroll_id as unknown as PayrollEntity},
+    )))
+    
+  }
 
   @Post('collection')
-  findOne(@Body() body: {searchConditions:SelectConditionType[]}) {
+  findOne(@Body() body: { searchConditions: SelectConditionType[] }) {
     return this.payrollService.find(body.searchConditions);
   }
 

@@ -2,11 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { QueryParams } from 'src/common/types/response.type';
 import { searchConditionQuery, SelectConditionType } from 'src/common/utils/responses/condition.helper';
+import { BadRequest } from 'src/common/utils/responses/error.helper';
 import { paginatedQuery } from 'src/common/utils/responses/pagination';
 import { getConnection, Repository } from 'typeorm';
 import { AddressRepositoryService } from '../address/address.repository';
 import { CreateAddressDto } from '../address/dto/create-address.dto';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
+import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { EmployeeEntity } from './entities/employee.entity';
 
 @Injectable()
@@ -76,4 +78,22 @@ GROUP BY emp.id, d."name"
     }),meta}
   }
 
+  async findOne(params: UpdateEmployeeDto) {
+    return await this.employeesRepository.find({ where: { ...params } });
+  }
+  async update(
+    id: number,
+    updatePayrollRecordDetailDto: UpdateEmployeeDto,
+  ) {
+    const data = await this.employeesRepository.update(
+      id,
+      updatePayrollRecordDetailDto,
+    );
+    if (data.affected) {
+      return { ...data, dataUpdated: await this.findOne({id}) };
+    }
+    throw BadRequest({
+      message: `unable to update record with id ${id}`,
+    });
+  }
 }

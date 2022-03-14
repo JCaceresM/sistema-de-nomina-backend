@@ -139,7 +139,7 @@ export class EmployeeEntity {
   @JoinColumn({ name: "position_id" })
   position_id: PositionEntity[];
 
-  @OneToOne(() => PayrollEntity)
+  @ManyToOne(() => PayrollEntity)
   @JoinColumn({ name:'payroll_id'})
   payroll_id: PayrollEntity;
 
