@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { searchConditionQuery } from 'src/common/utils/responses/condition.helper';
 import { BadRequest } from 'src/common/utils/responses/error.helper';
 import { getConnection, getRepository, Repository } from 'typeorm';
 import { PayrollNewsRelationEntity } from '../payroll-news-relation/entities/payroll-news-relation.entity';
@@ -46,4 +47,11 @@ export class PayrollNewsService {
    `
    return await getConnection().query(statement)
  }
+//  async getPayrollNews(conditions) {
+//    const statement = `
+//    SELECT pn.id, pn.amount, pn."type", pn.description, pn."name", pn.operation, pn.company_id, pn.status, pn.updated_at, pn.created_at, pn.user_update, pn.user_insert, pn.payroll_id
+//    FROM payroll_news pn where 1=1 ${ await searchConditionQuery(conditions,"payroll_news",'pn')}
+//    `
+//    return await getConnection().query(statement)
+//  }
 }

@@ -31,6 +31,10 @@ export class PayrollNewsController {
   findOne(@Param('id') id: string) {
     return this.PayrollNewsRepositoryService.findOne(+id);
   }
+  // @Get('collection')
+  // find(@Body() params: {conditions: SelectConditionType}) {
+  //   return this.payrollNewsService.getPayrollNews(params.conditions);
+  // }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCashDiscountDto: UpdatePayrollNewsDto) {
