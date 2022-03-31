@@ -17,6 +17,9 @@ export class BankAccountEntity {
 
   @Column({ type: 'text', unique: false })
   description: string;
+  
+  @Column({ type: 'text', unique: false })
+  name: string;
 
   @Column({ type: 'text', unique: false })
   status: string;
