@@ -56,7 +56,7 @@ export class EmployeesService {
     emp.relinquishment_detail, emp.updated_at, emp.created_at, emp.user_update, emp.working_time, emp.user_insert, emp.department_id, 
     emp.position_id, emp.payroll_id ,  COALESCE(json_agg(payroll_news) FILTER (WHERE payroll_news.amount  IS NOT NULL), '[]') AS payroll_news , d."name" as department
 FROM employee as emp 
-left join department d on d.id = emp.id
+left join department d on d.id = emp.department_id
 left join lateral 
 (SELECT * FROM public.payroll_news AS pn 
   INNER JOIN payroll_news_relation r
