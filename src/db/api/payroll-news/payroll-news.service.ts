@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { searchConditionQuery } from 'src/common/utils/responses/condition.helper';
+import { searchConditionQuery, SelectConditionType } from 'src/common/utils/responses/condition.helper';
 import { BadRequest } from 'src/common/utils/responses/error.helper';
 import { getConnection, getRepository, Repository } from 'typeorm';
 import { PayrollNewsRelationEntity } from '../payroll-news-relation/entities/payroll-news-relation.entity';
@@ -37,13 +37,13 @@ export class PayrollNewsService {
       throw BadRequest({})
     }
   }
- async getEmployeeNews(id:number) {
+ async getEmployeeNews(id:number, conditions: SelectConditionType[]) {
    const statement = `
       SELECT prn.id, prn.amount, prn."type", prn.description, prn."name", prn.operation, 
             prn.company_id, prn.status, prn.updated_at, prn.created_at, prn.user_update, prn.user_insert, prn.payroll_id 
       FROM payroll_news prn,
           payroll_news_relation pnr 
-      where prn.id  = pnr.payroll_news_id and ${id}= pnr.employee_id 
+      where prn.id  = pnr.payroll_news_id and ${id}= pnr.employee_id  ${ await searchConditionQuery(conditions,"payroll_news",'prn')}
    `
    return await getConnection().query(statement)
  }
