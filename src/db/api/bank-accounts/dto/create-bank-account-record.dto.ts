@@ -1,26 +1,20 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateBankAccountDto {
+export class CreateBankAccountRecordDto {
+  @ApiProperty()
+  payroll_record_id: number;
+
+  @ApiProperty()
+  bank_account_id: number;
+
+  @ApiProperty()
+  type: string;
+  
   @ApiProperty()
   id: number;
 
   @ApiProperty()
-  description: string;
-  
-  @ApiProperty()
-  name: string;
-
-  @ApiProperty()
-  balance: number;
-  
-  @ApiProperty()
-  type: string;
-
-  @ApiProperty()
-  status: string;
-
-  @ApiProperty()
-  company_id: number;
+  amount: number;
 
   @ApiProperty()
   updated_at: Date;
@@ -30,7 +24,15 @@ export class CreateBankAccountDto {
 
   @ApiProperty()
   user_update: string;
+  
+  @ApiProperty()
+  description: string;
 
   @ApiProperty()
   user_insert: string;
+  @ApiProperty()
+  status: string;
+
+  @ApiProperty()
+  transaction_type: string;
 }

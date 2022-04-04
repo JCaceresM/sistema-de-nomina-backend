@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AppConfigService } from './config/getterConfig.service';
 import { AuthModule } from './auth/auth.module';
 import { PositionsModule } from './db/api/positions/positions.module';
-import  { typeormModuleOptions } from './config/database.config';
+import { typeormModuleOptions } from './config/database.config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { DatabaseEntitiesModule } from './db/db.module';
 import { LocalModule } from './local/local.module';
@@ -12,11 +12,9 @@ import { LocalModule } from './local/local.module';
   imports: [
     TypeOrmModule.forRoot({
       ...typeormModuleOptions(),
-         } as TypeOrmModuleOptions),
+    } as TypeOrmModuleOptions),
     AuthModule,
-   
     DatabaseEntitiesModule,
-   
     LocalModule,
   ],
 
@@ -26,8 +24,5 @@ export class AppModule {
   static port: number | string;
   constructor(private readonly _configService: AppConfigService) {
     AppModule.port = this._configService.get('PORT');
-    
   }
 }
-
-

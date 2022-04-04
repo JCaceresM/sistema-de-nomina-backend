@@ -18,10 +18,10 @@ export function typeormModuleOptions(): TypeOrmModuleOptions {
      *  * https://typeorm.io/#/migrations
      */
     migrationsRun: true,
-    migrations: [join(__dirname, '../db/migration/**/*{.ts,.js}')],
+    migrations: [join(__dirname, '../db/migrations/**/*{.ts,.js}')],
     migrationsTableName: 'migrations',
     cli: {
-      migrationsDir: 'src/db/migration',
+      migrationsDir: 'src/db/migrations',
     },
 
      ssl: {

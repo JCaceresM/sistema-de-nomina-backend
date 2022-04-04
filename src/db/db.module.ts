@@ -30,7 +30,10 @@ import { PayrollRecordDetailsModule } from './api/payroll-record-details/payroll
     PositionsModule,
     ParametersModule,
     PayrollNewsRecordModule,
-    PayrollNewsRelationModule,PayrollRecordModule, PayrollRecordUsersRelationModule, PayrollRecordDetailsModule
+    PayrollNewsRelationModule,
+    PayrollRecordModule,
+    PayrollRecordUsersRelationModule,
+    PayrollRecordDetailsModule,
   ],
   exports: [
     EmployeesModule,
@@ -41,7 +44,8 @@ import { PayrollRecordDetailsModule } from './api/payroll-record-details/payroll
     ActivityModule,
     payrollModule,
     PayrollNewsModule,
-    BankAccountsModule,PayrollRecordModule,
+    BankAccountsModule,
+    PayrollRecordModule,
     PositionsModule,
   ],
 })

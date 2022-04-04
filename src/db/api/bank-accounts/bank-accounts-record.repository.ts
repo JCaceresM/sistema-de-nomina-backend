@@ -2,19 +2,20 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BadRequest } from 'src/common/utils/responses/error.helper';
 import { Repository } from 'typeorm';
-import { CreateBankAccountDto } from './dto/create-bank-account.dto';
-import { UpdateBankAccountDto } from './dto/update-bank-account.dto';
-import { BankAccountEntity } from './entities/account.entity';
+import { CreateBankAccountRecordDto } from './dto/create-bank-account-record.dto';
+import { UpdateBankAccountRecordDto } from '../bank-accounts/dto/update-bank-account-record.dto';
+import { BankAccountRecordEntity } from './entities/bank-account-record.entity';
+
 
 
 @Injectable()
-export class BankAccountsRepositoryService {
+export class BankAccountsRecordRepositoryService {
   constructor(
-    @InjectRepository(BankAccountEntity)
-    private BARepository: Repository<BankAccountEntity>,
+    @InjectRepository(BankAccountRecordEntity)
+    private BARepository: Repository<BankAccountRecordEntity>,
   ) {}
-  create(createAccountDto: CreateBankAccountDto) {
-    return this.BARepository.save(createAccountDto);
+  create(createBankAccountRecordDto: Partial<CreateBankAccountRecordDto>) {
+    return this.BARepository.save(createBankAccountRecordDto);
   }
 
   findAll() {
@@ -24,11 +25,8 @@ export class BankAccountsRepositoryService {
   findOne(id: number) {
     return this.BARepository.find({ where: { id } });
   }
-  findBy(params: Partial<CreateBankAccountDto>) {
-    return this.BARepository.find({ where: params });
-  }
 
-  async update(id: number, updateEmployeeDto: UpdateBankAccountDto) {
+  async update(id: number, updateEmployeeDto: UpdateBankAccountRecordDto) {
     const data = await this.BARepository.update(id, updateEmployeeDto);
     if (data.affected) {
       return { ...data, dataUpdated: await this.findOne(id) };
@@ -39,7 +37,7 @@ export class BankAccountsRepositoryService {
   }
 
   async remove(id: number) {
-    const dataToUpdate: Partial<UpdateBankAccountDto> = { status: 'I' };
+    const dataToUpdate: Partial<UpdateBankAccountRecordDto> = { status: 'I' };
 
     const data = await this.BARepository.update(id, dataToUpdate);
     if (data.affected) {

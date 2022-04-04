@@ -23,6 +23,7 @@ export class PayrollNewsRecordController {
   update(@Param('id') id: string, @Body() updatePayrollNewsRecordDto: UpdatePayrollNewsRecordDto) {
     return this.payrollNewsRecordService.update(+id, updatePayrollNewsRecordDto);
   }
+ 
 
   @Delete(':id')
   remove(@Param('id') id: string) {
