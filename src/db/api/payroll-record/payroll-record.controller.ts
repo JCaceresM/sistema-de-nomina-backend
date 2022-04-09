@@ -53,27 +53,25 @@ export class PayrollRecordController {
           condition: body.payroll_record_id,
         },
       ]);
+      
       if (payroll.length) {
-        await this.payrollRecordRepositoryService.update(
-          +body.payroll_record_id,
-          { status: 'AU' },
-        );
-
         await this.bankAccountsService.payment(
           body.payroll_record_id,
           body.bank_account_id,
           body.transaction_type,
-          payroll,
+          payroll[0],
         );
-      } else {
         await this.payrollRecordRepositoryService.update(
           +body.payroll_record_id,
-          { status: 'A' },
+          { status: 'AU' },
         );
+    return {message: 'Pago Realizado'}
+     
+      } else {
         throw BadRequest({ message: ' Esta nomina no existe' });
       }
     } catch (error) {
-      throw BadRequest({ message: 'no pagado' });
+      throw BadRequest({ message: error.message || 'no pagado' });
     }
   }
   @Patch(':id')

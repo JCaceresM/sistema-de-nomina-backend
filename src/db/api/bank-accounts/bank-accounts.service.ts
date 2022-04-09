@@ -25,18 +25,19 @@ export class BankAccountsService {
     const [bankAccount] = await this.bankAccountsRepositoryService.findBy({
       id: bank_account_id,
       status: 'A',
-    });
+    });    
     if (bankAccount !== undefined) {
       const income = payroll?.payroll_record_detail?.reduce(
         (prev: number, next: Record<string, number>) =>
           prev +
-          next?.salary +
+          next?.salary||0 +
           sumNews(payroll?.payroll_record_detail?.payroll_news_record, 'SUMA'),
         0,
       );
       const deductions = sumNews(
         payroll?.payroll_record_detail?.payroll_news_record,
       );
+console.log(payroll?.payroll_record_detail, payroll);
 
       if (bankAccount.balance > income + deductions) {
         await this.bankAccountsRepositoryService.update(bank_account_id, {
