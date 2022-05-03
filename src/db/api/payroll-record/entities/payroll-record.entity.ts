@@ -8,7 +8,9 @@ import {
   ManyToOne,
   ManyToMany,
   OneToMany,
+  JoinTable,
 } from 'typeorm';
+import { DepartmentEntity } from '../../departments/entities/department.entity';
 import { EmployeeEntity } from '../../employees/entities/employee.entity';
 import { PayrollNewsRecord } from '../../payroll-news-record/entities/payroll-news-record.entity';
 import { PayrollNewsEntity } from '../../payroll-news/entities/payroll-news.entity';
@@ -38,6 +40,7 @@ export class PayrollRecordEntity {
   @OneToMany(() => PayrollRecordDetailEntity, (activity) => activity.payroll_record_id)
   PayrollRecordDetails: PayrollRecordDetailEntity[];
 
+ 
  
 
   @ManyToOne(() => PayrollEntity, (p) => p.payroll_record)

@@ -7,6 +7,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
+import { EmployeeEntity } from '../../employees/entities/employee.entity';
 import { PayrollEntity } from '../../payroll/entities/payroll.entity';
 @Entity('payroll_news')
 export class PayrollNewsEntity {
@@ -46,7 +47,7 @@ export class PayrollNewsEntity {
   @Column({ type: 'text',nullable: true })
    user_insert: string;
 
-  @ManyToOne(() => PayrollEntity, payroll => payroll.PayrollNews)
-  @JoinColumn({ name: "payroll_id" })
-  payroll_id: PayrollEntity;
+  @ManyToOne(() => EmployeeEntity, payroll => payroll.PayrollNews)
+  @JoinColumn({ name: "employee_id" })
+  employee_id: PayrollEntity;
 }

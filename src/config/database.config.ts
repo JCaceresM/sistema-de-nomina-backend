@@ -24,12 +24,12 @@ export function typeormModuleOptions(): TypeOrmModuleOptions {
       migrationsDir: 'src/db/migrations',
     },
 
-     ssl: {
-      rejectUnauthorized: false
-    },
+    //  ssl: {
+    //   rejectUnauthorized: false
+    // },
 
     // Activar SOLO MANUALMENTE en DESARROLLO SI ES NECESARIO (DESACTIVAR EN PRODUCCION).
-    synchronize: false,
+    synchronize: true,
     logging: true,
     logger: 'file',
 

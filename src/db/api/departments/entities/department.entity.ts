@@ -7,6 +7,8 @@ import {
   ManyToOne,
   OneToMany,
   JoinColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import { CompanyEntity } from '../../company/entities/company.entity';
 import { EmployeeEntity } from '../../employees/entities/employee.entity';
@@ -55,4 +57,8 @@ export class DepartmentEntity {
   
   @OneToMany(() => EmployeeEntity, employee => employee.department_id)
   employees: EmployeeEntity[];
+
+  @ManyToMany(() => DepartmentEntity)
+  @JoinTable({name: 'department_relation', },)
+  categories: DepartmentEntity[]
 }

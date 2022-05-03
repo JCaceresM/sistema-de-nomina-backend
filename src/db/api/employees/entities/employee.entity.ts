@@ -21,6 +21,7 @@ import { PayrollEntity } from '../../payroll/entities/payroll.entity';
 import { PositionEntity } from '../../positions/entities/position.entity';
 import { AddressEntity } from '../../address/entities/address.entity';
 import { PayrollRecordDetailEntity } from '../../payroll-record-details/entities/payroll-record-detail.entity';
+import { PayrollNewsEntity } from '../../payroll-news/entities/payroll-news.entity';
 @Entity('employee')
 export class EmployeeEntity {
   @PrimaryGeneratedColumn()
@@ -130,7 +131,9 @@ export class EmployeeEntity {
   @JoinTable()
   roles: RoleEntity[];
 
-
+  @OneToMany(() => PayrollNewsEntity, p => p.employee_id)
+  PayrollNews: PayrollNewsEntity[];
+  
   @ManyToMany(() => ActivityEntity)
   @JoinTable()
   activities: ActivityEntity[];

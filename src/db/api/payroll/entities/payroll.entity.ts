@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
   ManyToMany,
   ManyToOne,
   OneToMany,
@@ -18,36 +19,36 @@ import { DepartmentEntity } from '../../departments/entities/department.entity';
 @Entity('payroll')
 export class PayrollEntity {
   @PrimaryGeneratedColumn() 
-   private id: number;
+    id: number;
 
  
 
   @Column({ type: 'integer' })
-  private company_id: number;
+   company_id: number;
 
   @Column({ type: 'text' })
-  private name: string;
+   name: string;
 
   @Column({ type: 'text' })
-  private type: string;
+   type: string;
 
   @Column({ type: 'text' })
-  private description: string;
+   description: string;
 
   @Column({ type: 'text' })
-  private status: string;
+   status: string;
 
   @UpdateDateColumn({ type: 'timestamp',nullable: true })
-  private updated_at: Date;
+   updated_at: Date;
 
   @CreateDateColumn({ type: 'timestamp', nullable: false })
-  private created_at: Date;
+   created_at: Date;
 
   @Column({ type: 'text',nullable: true })
-  private user_update: string;
+   user_update: string;
 
   @Column({ type: 'text',nullable: true })
-  private user_insert: string;
+   user_insert: string;
 
 
   @ManyToOne(() => BankAccountEntity, accountEntity => accountEntity.disbursement)
@@ -57,10 +58,9 @@ export class PayrollEntity {
   @OneToMany(() => PayrollRecordEntity, accountEntity => accountEntity.payroll_id)
   payroll_record: PayrollRecordEntity;
     
-  @OneToMany(() => PayrollNewsEntity, activity => activity.payroll_id)
-  PayrollNews: PayrollNewsEntity[];
+  
 
-  @OneToOne(() => DepartmentEntity)
-  @JoinColumn({name:"department_id"})
-  profile: DepartmentEntity;
+  @ManyToMany(() => DepartmentEntity)
+  @JoinTable({name: 'payroll_deparments'})
+  deparments: DepartmentEntity[]
 }
