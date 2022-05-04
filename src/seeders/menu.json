@@ -43,6 +43,15 @@
 
     },
     {
+        "id_actividad":"01-09",
+        "description": "Crear",
+        "parent": "01",
+        "status": "A",
+        "user_insert": "default",
+        "route":"fixed_payroll/create"
+
+    },
+    {
         "id_actividad":"01-05",
         "description": "Verificar / Registar",
         "parent": "01",

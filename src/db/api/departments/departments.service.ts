@@ -28,4 +28,18 @@ export class DepartmentsService {
           meta,
         };
       }
+    async findNotInPayroll(conditions: SelectConditionType[] = [], queryParams: QueryParams) {
+        const statement = `
+        SELECT id, "name", "location", budget, status, "type", updated_at, created_at, user_update, user_insert, company_id
+        FROM department d
+        join payroll_deparments pd on pd."departmentId" != d.id
+        where  1=1 ${await searchConditionQuery(conditions, 'department', 'd')}
+            `;
+        const [data, meta]: any = await paginatedQuery(statement, queryParams);
+    
+        return {
+          data,
+          meta,
+        };
+      }
 }

@@ -24,6 +24,17 @@ export class DepartmentsController {
       { page: take, size: skip },
     );
   }                                                                                  
+  @Post('not-in-payrrol')
+  async findNotInPayroll(
+    @Param('take') take: number,
+    @Param('skip') skip: number,
+    @Body() params: { searchConditions: SelectConditionType[] },
+  ) {
+    return this.departmentsService.findNotInPayroll(
+      params.searchConditions,
+      { page: take, size: skip },
+    );
+  }                                                                                  
   @Get('all')
   findAll() {
     return this.departmentsRepository.findAll();
