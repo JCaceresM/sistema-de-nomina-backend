@@ -35,9 +35,6 @@ export class CreateEmployeeDto {
   gender: string;
 
   @ApiProperty()
-  age: number;
-
-  @ApiProperty()
   marital_status: string;
 
   @ApiProperty()
@@ -46,11 +43,6 @@ export class CreateEmployeeDto {
   @ApiProperty()
   born_date: Date;
 
-  @ApiProperty()
-  hire_date: Date;
-
-  @ApiProperty()
-  nss: string;
 
   @ApiProperty()
   department_id: DepartmentEntity;
@@ -103,8 +95,6 @@ export class CreateEmployeeDto {
   @ApiProperty()
   user_update: string;
 
-  @ApiProperty()
-  working_time: string;
 
   @ApiProperty()
   user_insert: string;

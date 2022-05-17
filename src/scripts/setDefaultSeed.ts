@@ -67,7 +67,7 @@ export const setDefaultSeed = async () => {
   defaultRoles = await rolesRepository.find();
   defaultActivity = await activityRepository.find();
 
-  if (!defaultUser.length && defaultRoles.length && defaultActivity.length) {
+  if (!defaultUser.length && defaultRoles.length && defaultActivity.length) {    
     const adminUser = EmployeeRepository.create({
       ...user,
       roles: defaultRoles,

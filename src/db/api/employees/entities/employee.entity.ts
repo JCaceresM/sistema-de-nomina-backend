@@ -51,9 +51,6 @@ export class EmployeeEntity {
   @Column({ type: 'text', unique: false, nullable: true })
   gender: string;
 
-  @Column({ type: 'integer', unique: false, nullable: true })
-  age: number;
-
   @Column({ type: 'text', unique: false, nullable: true })
   marital_status: string;
 
@@ -63,11 +60,6 @@ export class EmployeeEntity {
   @Column({ type: 'timestamp', unique: false, nullable: true })
   born_date: Date;
 
-  @Column({ type: 'timestamp', unique: false, nullable: true })
-  hire_date: Date;
-
-  @Column({ type: 'text', unique: false, nullable: true })
-  nss: string;
 
   @ManyToOne(() => DepartmentEntity, (department) => department.employees)
   @JoinColumn({name: 'department_id'})
@@ -124,8 +116,6 @@ export class EmployeeEntity {
   @Column({ type: 'text', nullable: true })
   user_update: string;
 
-  @Column({ type: 'text', nullable: true })
-  working_time: string;
 
   @Column({ type: 'text', nullable: true })
   user_insert: string;

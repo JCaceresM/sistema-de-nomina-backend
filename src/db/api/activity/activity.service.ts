@@ -14,9 +14,8 @@ export class ActivityService {
   ) {}
   async getActivityUser(id: string) {
     const statement = `
-    SELECT a.id,a.description,a.route,a.parent,a.id_actividad,a.parameters FROM activity a
-    LEFT JOIN employee e ON e."id" = a."id"
-    AND e.id = '${id}'
+    SELECT a.id,a.description,a.route,a.parent,a.id_actividad,a.parameters FROM activity a, employee_activities_activity eaa 
+    where a.id = eaa."activityId"  and eaa."employeeId" =  '${id}'
           `;
     const statement2 = `
     SELECT id_actividad FROM activity a
