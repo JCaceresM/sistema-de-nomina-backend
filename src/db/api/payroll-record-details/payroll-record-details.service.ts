@@ -45,9 +45,7 @@ export class PayrollRecordDetailsService {
   async generateVaucher(
     id: number,
   ) {
-    const data = await this.findByParams({payroll_record_id:id}); 
-    console.log(data);
-    
+    const data = await this.findByParams({payroll_record_id:id});     
     if (data.length) {
       return Promise.all(
         data.map(async (row) => {

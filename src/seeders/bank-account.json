@@ -1,0 +1,7 @@
+{
+  "description": "Cuenta corriente de la empresa",
+  "type": "N",
+  "name": "Cuenta Reservas",
+  "operation": "SUMA",
+  "balance": 1000000, "status": "A"
+}

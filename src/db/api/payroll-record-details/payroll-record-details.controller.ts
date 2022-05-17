@@ -41,8 +41,6 @@ export class PayrollRecordDetailsController {
     @Body()
     updatePayrollRecordDetailDto: UpdatePayrollRecordDetailDto,
   ) {
-    console.log(id);
-
     return this.payrollRecordDetailsService.update(
       +id,
       updatePayrollRecordDetailDto,
@@ -50,8 +48,6 @@ export class PayrollRecordDetailsController {
   }
   @Post('voucher')
   generateVoucher(@Body() body: {'payroll_record_id': string}) {
-    console.log(body);
-
     return this.payrollRecordDetailsService.generateVaucher(+body.payroll_record_id);
   }
 }

@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { searchConditionQuery } from 'src/common/utils/responses/condition.helper';
 import { BadRequest } from 'src/common/utils/responses/error.helper';
 import { AFP, ISR, SFS } from 'src/common/utils/tax/index.helpers';
-import {  getConnection, Repository } from 'typeorm';
+import { getConnection, Repository } from 'typeorm';
 import { PayrollNewsRecord } from '../payroll-news-record/entities/payroll-news-record.entity';
 import { PayrollRecordDetailEntity } from '../payroll-record-details/entities/payroll-record-detail.entity';
 import { PayrollRecordUsersRelationEntity } from '../payroll-record-users-relation/entities/payroll-record-users-relation.entity';
@@ -88,7 +88,23 @@ export class PayrollRecordService {
       const payrollRacordDetails = await Promise.all(
         createPayrollRecordDto.employees.map((elem) => this.create(elem)),
       );
-
+      const currentDate = new Date();
+      const statement = `
+      select *  from payroll_record pr where pr.payroll_id = ${
+        createPayrollRecordDto.payroll_id
+      } and pr.registered_at between '${currentDate.getFullYear()}-${
+        currentDate.getMonth()+1
+      }-01' and '${currentDate.getFullYear()}-${
+        currentDate.getMonth()===10? 1: currentDate.getMonth()+2
+      }-01'      
+      `;
+      
+      const isRegistred = await getConnection().query(statement);
+      if (isRegistred.length) {
+        throw BadRequest({
+          message: `No puedes registrar la nomina mas de una vez al mes`,
+        });
+      }
       const payrollRecordData = {
         company_id: createPayrollRecordDto.company_id,
         name: createPayrollRecordDto.name,
@@ -114,7 +130,7 @@ export class PayrollRecordService {
       );
       return { ...data[0], payrollRacordDetails };
     } catch (error) {
-      throw BadRequest({ body: error });
+      throw BadRequest({ message: error.message||'not_ok' });
     }
   }
   async find(conditions) {
@@ -141,10 +157,10 @@ export class PayrollRecordService {
       ) as payroll_news_record on payroll_news_record.payroll_record_detail_id =prd.id
       GROUP BY prd.id, emp.id, pst.name
     ) as payroll_record_detail on payroll_record_detail.payroll_record_id=pr.id 
-	  where 1=1 ${ await searchConditionQuery(conditions,"payroll_record",'pr')}
+	  where 1=1 ${await searchConditionQuery(conditions, 'payroll_record', 'pr')}
     GROUP BY pr.id
     `;
-    const data = await getConnection().query(statement)
-    return data
+    const data = await getConnection().query(statement);
+    return data;
   }
 }

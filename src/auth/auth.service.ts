@@ -5,7 +5,6 @@ import { Login } from 'src/common/types/login.types';
 import { JWTExpirationToken } from 'src/common/utils/date/extimation.date';
 import { AppConfigService } from 'src/config/getterConfig.service';
 import { EmployeesService } from 'src/db/api/employees/employees.service';
-import { formatMenuOptions } from 'src/common/utils/menu/formatMenuOptions';
 
 @Injectable()
 export class AuthService {

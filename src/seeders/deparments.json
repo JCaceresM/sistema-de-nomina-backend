@@ -1,0 +1,122 @@
+[
+  {
+    "name": "asistencia social",
+    "location": "A01",
+    "budget": 184.0,
+    "status": "A",
+    "type": "F",
+    "user_update": null,
+    "user_insert": "default",
+    "company_id": 1
+  },
+  {
+    "name": "cementerio",
+    "location": "Linea abajo, galindo",
+    "budget": 184.0,
+    "status": "A",
+    "type": "F",
+    "user_update": null,
+    "user_insert": "default",
+    "company_id": 1
+  },
+  {
+    "name": "concejo municipal",
+    "location": "A02",
+    "budget": 184.0,
+    "status": "A",
+    "type": "F",
+    "user_update": null,
+    "user_insert": "default",
+    "company_id": 1
+  },
+  {
+    "name": "evento deportivo  y recreación ",
+    "location": "A03",
+    "budget": 184.0,
+    "status": "A",
+    "type": "F",
+    "user_update": null,
+    "user_insert": "default",
+    "company_id": 1
+  },
+  {
+    "name": "gestion urbana, planeacion y Reg. Uso de suelo ",
+    "location": "A04",
+    "budget": 184.0,
+    "status": "A",
+    "type": "F",
+    "user_update": null,
+    "user_insert": "default",
+    "company_id": 1
+  },
+  {
+    "name": "limpieza",
+    "location": "A01",
+    "budget": 184.0,
+    "status": "A",
+    "type": "F",
+    "user_update": null,
+    "user_insert": "default",
+    "company_id": 1
+  },
+  {
+    "name": "policia municipal ",
+    "location": "A05",
+    "budget": 184.0,
+    "status": "A",
+    "type": "F",
+    "user_update": null,
+    "user_insert": "default",
+    "company_id": 1
+  },
+  {
+    "name": "preservacion del medio ambiente y control ecologico",
+    "location": "A06",
+    "budget": 184.0,
+    "status": "A",
+    "type": "F",
+    "user_update": null,
+    "user_insert": "default",
+    "company_id": 1
+  },
+  {
+    "name": "recoleccion de desechos sólidos ",
+    "location": "A07",
+    "budget": 184.0,
+    "status": "A",
+    "type": "F",
+    "user_update": null,
+    "user_insert": "default",
+    "company_id": 1
+  },
+  {
+    "name": "servicios administrativos",
+    "location": "A08",
+    "budget": 184.0,
+    "status": "A",
+    "type": "F",
+    "user_update": null,
+    "user_insert": "default",
+    "company_id": 1
+  },
+  {
+    "name": "Transformación",
+    "location": "A09",
+    "budget": 184.0,
+    "status": "A",
+    "type": "O",
+    "user_update": null,
+    "user_insert": "default",
+    "company_id": 1
+  },
+  {
+    "name": "Gastos de representación  de los alcaldes  y regidores",
+    "location": "A099",
+    "budget": 184.0,
+    "status": "A",
+    "type": "S",
+    "user_update": null,
+    "user_insert": "default",
+    "company_id": 1
+  }
+]

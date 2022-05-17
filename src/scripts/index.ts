@@ -1,3 +1,3 @@
 
-export * as userScrips from './setDefaultUser'
+export * as userScrips from './setDefaultSeed'
 // export * as generateTypeormConfigFile from './generate-typeorm-file'

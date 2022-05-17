@@ -1,0 +1,24 @@
+[
+  {
+    "description":"Nomina mensula Fija",
+    "type": "F",
+    "name": "Nomina mensual",
+    "status": "A"
+
+  },
+  {
+    "description":"Nomina mensula Fija",
+    "type": "O",
+    "name": "Nomina mensual",
+    "status": "A"
+
+  },
+  {
+    "description":"Nomina mensula Fija",
+    "type": "S",
+    "name": "Nomina mensual",
+    "status": "A"
+
+  }
+
+]

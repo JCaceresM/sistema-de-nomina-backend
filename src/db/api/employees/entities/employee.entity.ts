@@ -30,6 +30,9 @@ export class EmployeeEntity {
   @Column({ type: 'text', unique: true, })
   document_id: string;
 
+  @Column({ type: 'text', unique: false, nullable: true })
+  type: string;
+
   @Column({ type: 'text', unique: false,nullable: true })
   user_name: string;
 

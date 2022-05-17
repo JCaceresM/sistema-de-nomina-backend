@@ -1,187 +1,324 @@
 [
-    {
-        "id_actividad":"01",
-        "description": "Nomina Fija",
-        "parent": null,
-        "status": "A",
-        "user_insert": "default"
-        
-    },
-    {
-        "id_actividad":"01-01",
-        "description": "Consulta Nomina",
-        "parent": "01",
-        "status": "A",
-        "user_insert": "default",
-        "route":"fixed_payroll/consulting"
-    },
-    {
-        "id_actividad":"01-02",
-        "description": "Consultar empleados",
-        "parent": "01",
-        "status": "A",
-        "user_insert": "default",
-        "route":"fixed_payroll/employees"
+  {
+    "id_actividad": "01",
+    "description": "Nomina Fija",
+    "parent": null,
+    "status": "A",
+    "user_insert": "default",
+    "parameters": { "type": "F" }
+  },
+  {
+    "id_actividad": "01-01",
+    "description": "Consulta Nomina",
+    "parent": "01",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/consulting",
+    "parameters": { "type": "F" }
+  },
+  {
+    "id_actividad": "01-02",
+    "description": "Consultar empleados",
+    "parent": "01",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/employees",
+    "parameters": { "type": "F" }
+  },
+  {
+    "id_actividad": "01-03",
+    "description": "Consultar descuento",
+    "parent": "01",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/cash_discount",
+    "parameters": { "type": "F" }
+  },
+  {
+    "id_actividad": "01-04",
+    "description": "Bonificaciones",
+    "parent": "01",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/payment_news",
+    "parameters": { "type": "F" }
+  },
+ 
+  {
+    "id_actividad": "01-05",
+    "description": "Verificar / Registar",
+    "parent": "01",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/check_register",
+    "parameters": { "type": "F" }
+  },
+  {
+    "id_actividad": "01-06",
+    "description": "Aprobar",
+    "parent": "01",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/approve",
+    "parameters": { "type": "F" }
+  },
+  {
+    "id_actividad": "01-07",
+    "description": "Autorizar",
+    "parent": "01",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/authorization",
+    "parameters": { "type": "F" }
+  },
+  {
+    "id_actividad": "01-08",
+    "description": "Nomina Reversadas",
+    "parent": "01",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/revert",
+    "parameters": { "type": "F" }
+  },
+  {
+    "id_actividad": "02",
+    "description": "Nomina Ocacional",
+    "parent": null,
+    "status": "A",
+    "user_insert": "default",
+    "parameters": { "type": "F" }
+  },
+  {
+    "id_actividad": "02-01",
+    "description": "Consulta Nomina",
+    "parent": "02",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/consulting",
+    "parameters": { "type": "O" }
+  },
+  {
+    "id_actividad": "02-02",
+    "description": "Consultar empleados",
+    "parent": "02",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/employees",
+    "parameters": { "type": "O" }
+  },
+  {
+    "id_actividad": "02-03",
+    "description": "Consultar descuento",
+    "parent": "02",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/cash_discount",
+    "parameters": { "type": "O" }
+  },
+  {
+    "id_actividad": "02-04",
+    "description": "Bonificaciones",
+    "parent": "02",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/payment_news",
+    "parameters": { "type": "O" }
+  },
 
-    },
-    {
-        "id_actividad":"01-03",
-        "description": "Consultar descuento",
-        "parent": "01",
-        "status": "A",
-        "user_insert": "default",
-        "route":"fixed_payroll/cash_discount"
+  {
+    "id_actividad": "02-05",
+    "description": "Verificar / Registar",
+    "parent": "02",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/check_register",
+    "parameters": { "type": "O" }
+  },
+  {
+    "id_actividad": "02-06",
+    "description": "Aprobar",
+    "parent": "02",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/approve",
+    "parameters": { "type": "O" }
+  },
+  {
+    "id_actividad": "02-07",
+    "description": "Autorizar",
+    "parent": "02",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/authorization",
+    "parameters": { "type": "O" }
+  },
+  {
+    "id_actividad": "02-08",
+    "description": "Nomina Reversadas",
+    "parent": "02",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/revert",
+    "parameters": { "type": "S" }
+  },
+  {
+    "id_actividad": "03",
+    "description": "Nomina Subvenciones",
+    "parent": null,
+    "status": "A",
+    "user_insert": "default"
+  },
+  {
+    "id_actividad": "03-01",
+    "description": "Consulta Nomina",
+    "parent": "03",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/consulting",
+    "parameters": { "type": "S" }
+  },
+  {
+    "id_actividad": "03-02",
+    "description": "Consultar empleados",
+    "parent": "03",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/employees",
+    "parameters": { "type": "S" }
+  },
+  {
+    "id_actividad": "03-03",
+    "description": "Consultar descuento",
+    "parent": "03",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/cash_discount",
+    "parameters": { "type": "S" }
+  },
+  {
+    "id_actividad": "03-04",
+    "description": "Bonificaciones",
+    "parent": "03",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/payment_news",
+    "parameters": { "type": "S" }
+  },
 
-    },
-    {
-        "id_actividad":"01-04",
-        "description": "Bonificaciones",
-        "parent": "01",
-        "status": "A",
-        "user_insert": "default",
-        "route":"fixed_payroll/payment_news"
+  {
+    "id_actividad": "03-05",
+    "description": "Verificar / Registar",
+    "parent": "03",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/check_register",
+    "parameters": { "type": "S" }
+  },
+  {
+    "id_actividad": "03-06",
+    "description": "Aprobar",
+    "parent": "03",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/approve",
+    "parameters": { "type": "S" }
+  },
+  {
+    "id_actividad": "03-07",
+    "description": "Autorizar",
+    "parent": "03",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/authorization",
+    "parameters": { "type": "S" }
+  },
+  {
+    "id_actividad": "03-08",
+    "description": "Nomina Reversadas",
+    "parent": "03",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/revert",
+    "parameters": { "type": "P" }
+  },
+  {
+    "id_actividad": "04",
+    "description": "Nomina Pensionados",
+    "parent": null,
+    "status": "A",
+    "user_insert": "default"
+  },
+  {
+    "id_actividad": "04-01",
+    "description": "Consulta Nomina",
+    "parent": "04",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/consulting",
+    "parameters": { "type": "P" }
+  },
+  {
+    "id_actividad": "04-02",
+    "description": "Consultar empleados",
+    "parent": "04",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/employees",
+    "parameters": { "type": "P" }
+  },
+  {
+    "id_actividad": "04-03",
+    "description": "Consultar descuento",
+    "parent": "04",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/cash_discount",
+    "parameters": { "type": "P" }
+  },
+  {
+    "id_actividad": "04-04",
+    "description": "Bonificaciones",
+    "parent": "04",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/payment_news",
+    "parameters": { "type": "P" }
+  },
 
-    },
-    {
-        "id_actividad":"01-09",
-        "description": "Crear",
-        "parent": "01",
-        "status": "A",
-        "user_insert": "default",
-        "route":"fixed_payroll/create"
-
-    },
-    {
-        "id_actividad":"01-05",
-        "description": "Verificar / Registar",
-        "parent": "01",
-        "status": "A",
-        "user_insert": "default",
-        "route":"fixed_payroll/check_register"
-
-    },
-    {
-        "id_actividad":"01-06",
-        "description": "Aprobar",
-        "parent": "01",
-        "status": "A",
-        "user_insert": "default",
-        "route":"fixed_payroll/approve"
-
-    },
-    {
-        "id_actividad":"01-07",
-        "description": "Autorizar",
-        "parent": "01",
-        "status": "A",
-        "user_insert": "default",
-        "route":"fixed_payroll/authorization"
-
-    },
-    {
-        "id_actividad":"01-08",
-        "description": "Reversar Nomina registrada",
-        "parent": "01",
-        "status": "A",
-        "user_insert": "default",
-        "route":"fixed_payroll/revert"
-
-    },
-    {
-        "id_actividad":"06",
-        "description": "Administración",
-        "parent": null,
-        "status": "A",
-        "user_insert": "default",
-        "route":""
-
-    },
-    {
-        "id_actividad":"06-01",
-        "description": "Empleados",
-        "parent": "06",
-        "status": "A",
-        "user_insert": "default",
-        "route":""
-
-    },
-    {
-        "id_actividad":"06-01-01",
-        "description": "Registrar / Consultar",
-        "parent": "06-01",
-        "status": "A",
-        "user_insert": "default",
-        "route":"config/employee/register"
-
-    },
-    {
-        "id_actividad":"06-02",
-        "description": "Usuarios",
-        "parent": "06",
-        "status": "A",
-        "user_insert": "default",
-        "route":""
-
-    },
-    {
-        "id_actividad":"06-02-01",
-        "description": "Registrar / Consultar",
-        "parent": "06-02",
-        "status": "A",
-        "user_insert": "default",
-        "route":"config/users/register"
-    },
-    {
-        "id_actividad":"06-03",
-        "description": "Departamentos",
-        "parent": "06",
-        "status": "A",
-        "user_insert": "default",
-        "route":""
-
-    },
-    {
-        "id_actividad":"06-03-01",
-        "description": "Registrar / Consultar",
-        "parent": "06-03",
-        "status": "A",
-        "user_insert": "default",
-        "route":"config/departments/register"
-    }
-    ,
-    {
-        "id_actividad":"06-04",
-        "description": "Posiciones de empleados",
-        "parent": "06",
-        "status": "A",
-        "user_insert": "default",
-        "route":""
-
-    },
-    {
-        "id_actividad":"06-04-01",
-        "description": "Registrar / Consultar",
-        "parent": "06-04",
-        "status": "A",
-        "user_insert": "default",
-        "route":"config/positions/register"
-    }
-    ,
-    {
-        "id_actividad":"06-05",
-        "description": "Nomina",
-        "parent": "06",
-        "status": "A",
-        "user_insert": "default",
-        "route":""
-
-    },
-    {
-        "id_actividad":"06-05-01",
-        "description": "Registrar / Consultar",
-        "parent": "06-05",
-        "status": "A",
-        "user_insert": "default",
-        "route":"config/payroll/register"
-    }
+  {
+    "id_actividad": "04-05",
+    "description": "Verificar / Registar",
+    "parent": "04",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/check_register",
+    "parameters": { "type": "P" }
+  },
+  {
+    "id_actividad": "04-06",
+    "description": "Aprobar",
+    "parent": "04",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/approve",
+    "parameters": { "type": "P" }
+  },
+  {
+    "id_actividad": "04-07",
+    "description": "Autorizar",
+    "parent": "04",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/authorization",
+    "parameters": { "type": "P" }
+  },
+  {
+    "id_actividad": "04-08",
+    "description": "Nomina Reversadas",
+    "parent": "04",
+    "status": "A",
+    "user_insert": "default",
+    "route": "payroll/revert",
+    "parameters": { "type": "P" }
+  }
 ]

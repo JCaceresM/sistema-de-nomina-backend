@@ -18,21 +18,18 @@ export class PayrollNewsService {
   async addPayrollNews(
     employee_id: number,
     payrollNewsDto: UpdatePayrollNewsDto,
-  ) {
-    console.log(employee_id,payrollNewsDto);
-    
+  ) {    
     try {
       const data = await this.payrollNewsRepositoryService.create(
         payrollNewsDto,
       );
-      this.payrollNewsRelationRepository.save({
+     return  await this.payrollNewsRelationRepository.save({
         employee_id,
         payroll_news_id: data.id,
         company_id: payrollNewsDto.company_id,
         user_insert: payrollNewsDto.user_insert
       });
     } catch (error) {
-      console.log(error);
       
       throw BadRequest({})
     }
@@ -40,7 +37,7 @@ export class PayrollNewsService {
  async getEmployeeNews(id:number, conditions: SelectConditionType[]) {
    const statement = `
       SELECT prn.id, prn.amount, prn."type", prn.description, prn."name", prn.operation, 
-            prn.company_id, prn.status, prn.updated_at, prn.created_at, prn.user_update, prn.user_insert, prn.payroll_id 
+            prn.company_id, prn.status, prn.updated_at, prn.created_at, prn.user_update, prn.user_insert
       FROM payroll_news prn,
           payroll_news_relation pnr 
       where prn.id  = pnr.payroll_news_id and ${id}= pnr.employee_id  ${ await searchConditionQuery(conditions,"payroll_news",'prn')}

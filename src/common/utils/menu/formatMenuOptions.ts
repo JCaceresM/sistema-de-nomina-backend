@@ -12,13 +12,11 @@ export const formatMenuOptions = (
   return parents.length? parents.map((data: any) => {
     const children = getChildren(rawOptions, data.id_actividad)
     if (children.length) {
-      if (children.length) {
         data['CHILDREN'] = children
-      }
     }
 
     return data
-  }):rawOptions
+  }).sort((a,b)=> +a.id_actividad - +b.id_actividad):rawOptions
 }
 
 const getChildren = (menuOptions: any[], idActividad: string) => {

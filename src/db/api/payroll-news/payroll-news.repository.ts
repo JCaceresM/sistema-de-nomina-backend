@@ -56,7 +56,7 @@ export class PayrollNewsRepositoryService {
     const statement = `
         SELECT prn.id, prn.amount, prn."type", prn.description, prn."name", prn.operation, 
                 prn.company_id, prn.status, prn.updated_at, prn.created_at, prn.user_update, 
-                prn.user_insert, prn.payroll_id 
+                prn.user_insert
       FROM payroll_news prn
 
       where  1=1 ${await searchConditionQuery(conditions, 'payroll_news', 'prn')}

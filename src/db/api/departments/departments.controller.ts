@@ -24,13 +24,23 @@ export class DepartmentsController {
       { page: take, size: skip },
     );
   }                                                                                  
-  @Post('not-in-payrrol')
+  @Post('not-in-payroll')
   async findNotInPayroll(
     @Param('take') take: number,
     @Param('skip') skip: number,
     @Body() params: { searchConditions: SelectConditionType[] },
   ) {
-    return this.departmentsService.findNotInPayroll(
+    return this.departmentsService.findNotInPayroll(     params.searchConditions,
+      { page: take, size: skip },
+    );
+  }                                                                                  
+  @Post('in-payroll')
+  async findInPayroll(
+    @Param('take') take: number,
+    @Param('skip') skip: number,
+    @Body() params: {searchConditions: SelectConditionType[] },
+  ) {
+    return this.departmentsService.findInPayroll(
       params.searchConditions,
       { page: take, size: skip },
     );
@@ -53,5 +63,9 @@ export class DepartmentsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.departmentsRepository.remove(+id);
+  }
+  @Post('delete/payroll-department')
+  delete(@Body() params: {payrollId: number,departmentId: number}) {
+    return this.departmentsService.deletedepartmentRelation(+params.payrollId,+params.departmentId);
   }
 }

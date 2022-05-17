@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { PayrollNewsEntity } from '../../payroll-news/entities/payroll-news.entity';
 import { PayrollRecordEntity } from '../../payroll-record/entities/payroll-record.entity';
 import { BankAccountEntity } from '../../bank-accounts/entities/account.entity';
+import { DepartmentEntity } from '../../departments/entities/department.entity';
 
 export class CreatePayrollDto {
   @ApiProperty()
@@ -36,9 +37,8 @@ export class CreatePayrollDto {
   user_insert: string;
 
 
- disbursement: BankAccountEntity;
+  deparments: DepartmentEntity[];
 
  payroll_record: PayrollRecordEntity;
    
- PayrollNews: PayrollNewsEntity[];
 }

@@ -8,7 +8,7 @@ import { ConfigService } from '@nestjs/config';
 import { initSwagger } from './app.swagger';
 import { AppConfigService } from './config/getterConfig.service';
 import { Logger, ValidationPipe } from '@nestjs/common';
-import setDefaultUser from './scripts/setDefaultUser';
+import {setDefaultSeed,setDefaultPayroll} from './scripts/setDefaultSeed';
 import generateTypeormConfigFile from './scripts/generate-typeorm-file';
 
 async function bootstrap() {
@@ -25,7 +25,8 @@ async function bootstrap() {
   
   initSwagger(app)
   generateTypeormConfigFile(config, appConfig);
-  await setDefaultUser( config, appConfig);
+  await setDefaultSeed();
+  await setDefaultPayroll();
   app.use(bodyParser.json({limit: '50mb'}));
   app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
   

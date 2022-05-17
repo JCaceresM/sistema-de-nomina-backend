@@ -43,14 +43,15 @@ const searchCondition = (
 export const searchConditionQuery = async (
   conditions: SelectConditionType[] = [],
   tableName: string,
-  tableNameSort: string,
+  tableNameShort: string,
 ): Promise<string> => {
+
   let query = ``;
   conditions = await deleteInvalidCondition(
     conditions,
     tableName,
-    tableNameSort,
-  );
+    tableNameShort,
+  );  
   conditions.forEach((condition) => {
     query += searchCondition(condition.operator, condition);
   });
@@ -60,7 +61,7 @@ export const searchConditionQuery = async (
 const deleteInvalidCondition = async (
   conditions: SelectConditionType[],
   tableName: string,
-  tableNameSort: string,
+  tableNameShort: string,
 ): Promise<SelectConditionType[]> => {
   const statement = `
   SELECT COLUMN_NAME,DATA_TYPE
@@ -71,12 +72,12 @@ const deleteInvalidCondition = async (
   try {
     const columns: { column_name: string; data_type: string }[] =
       await getConnection().query(statement);
-
     const columnExists = (field: string) =>
-      columns.some((elem) => elem.column_name === field?.toLocaleLowerCase());
+      columns.some((elem) => elem.column_name.toLocaleLowerCase() === field?.toLocaleLowerCase());
 
     const columnDataColumn = (field: string) =>
-      columns.filter((elem) => elem.column_name === field?.toLocaleLowerCase());
+      columns.filter((elem) => elem.column_name.toLocaleLowerCase() === field?.toLocaleLowerCase());
+
 
     return conditions
       
@@ -88,7 +89,7 @@ const deleteInvalidCondition = async (
         const columnType = columnInfo.data_type;
         return {
           ...condition,
-          field: tableNameSort + '.' + condition.field,
+          field: tableNameShort + '.' + `"${condition.field.toLocaleLowerCase()}"`,
           dataType: columnType,
         };
       });

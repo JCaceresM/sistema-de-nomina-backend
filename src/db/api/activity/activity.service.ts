@@ -14,7 +14,7 @@ export class ActivityService {
   ) {}
   async getActivityUser(id: string) {
     const statement = `
-    SELECT a.id,a.description,a.route,a.parent,a.id_actividad FROM activity a
+    SELECT a.id,a.description,a.route,a.parent,a.id_actividad,a.parameters FROM activity a
     LEFT JOIN employee e ON e."id" = a."id"
     AND e.id = '${id}'
           `;
@@ -26,6 +26,8 @@ export class ActivityService {
           `;
     const initial =( await getConnection().query(statement2)).map((res)=> res.id_actividad);
     const data = await getConnection().query(statement);
+    console.log(initial);
+    
     return formatMenuOptions(data, initial);
   }
 }

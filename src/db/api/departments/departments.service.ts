@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { QueryParams } from 'src/common/types/response.type';
 import { searchConditionQuery, SelectConditionType } from 'src/common/utils/responses/condition.helper';
 import { paginatedQuery } from 'src/common/utils/responses/pagination';
+import { getConnection } from 'typeorm';
 import { CreateDepartmentDto } from './dto/create-department.dto';
 import { UpdateDepartmentDto } from './dto/update-department.dto';
 
@@ -28,18 +29,47 @@ export class DepartmentsService {
           meta,
         };
       }
-    async findNotInPayroll(conditions: SelectConditionType[] = [], queryParams: QueryParams) {
+    async findNotInPayroll( conditions: SelectConditionType[] = [], queryParams: QueryParams) {
         const statement = `
         SELECT id, "name", "location", budget, status, "type", updated_at, created_at, user_update, user_insert, company_id
-        FROM department d
-        join payroll_deparments pd on pd."departmentId" != d.id
-        where  1=1 ${await searchConditionQuery(conditions, 'department', 'd')}
+        FROM department d where d.id not in (select pd."departmentId"  from payroll_deparments pd)
+           ${await searchConditionQuery(conditions, 'department', 'd')}
+            `;
+        const statement2 = `
+        SELECT id, "name", "location", budget, status, "type", updated_at, created_at, user_update, user_insert, company_id
+        FROM department d where d.id in (select pd."departmentId"  from payroll_deparments pd)
+        and d.id in (select pd."departmentId"  from payroll_deparments pd where 1=1 ${await searchConditionQuery(conditions, 'payroll_deparments', 'pd')})
+            `;
+        const [data, meta]: any = await paginatedQuery( statement, queryParams);
+    
+        return {
+          data, 
+          meta,
+        };
+      }
+    async findInPayroll( conditions: SelectConditionType[] = [], queryParams: QueryParams) {
+   
+        const statement = `
+        SELECT id, "name", "location", budget, status, "type", updated_at, created_at, user_update, user_insert, company_id
+        FROM department d where d.id in (select pd."departmentId"  from payroll_deparments pd)
+        and d.id in (select pd."departmentId"  from payroll_deparments pd where 1=1 ${await searchConditionQuery(conditions, 'payroll_deparments', 'pd')})
             `;
         const [data, meta]: any = await paginatedQuery(statement, queryParams);
     
         return {
           data,
           meta,
+        };
+      }
+    async deletedepartmentRelation(payrollId: number,departmentId: number) {
+   
+        const statement = `
+        DELETE FROM public.payroll_deparments
+        WHERE "payrollId"=${payrollId} AND "departmentId"=${departmentId};`
+        const data: any = await getConnection().query(statement)
+    
+        return {
+          data
         };
       }
 }

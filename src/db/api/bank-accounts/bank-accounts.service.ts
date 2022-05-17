@@ -37,8 +37,6 @@ export class BankAccountsService {
       const deductions = sumNews(
         payroll?.payroll_record_detail?.payroll_news_record,
       );
-console.log(payroll?.payroll_record_detail, payroll);
-
       if (bankAccount.balance > income + deductions) {
         await this.bankAccountsRepositoryService.update(bank_account_id, {
           balance: bankAccount.balance - income + deductions,

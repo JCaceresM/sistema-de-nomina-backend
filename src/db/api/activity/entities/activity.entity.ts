@@ -23,6 +23,9 @@ export class ActivityEntity {
   @Column({ type: 'text', unique: false })
   private status: string;
 
+  @Column({ type: 'simple-json', unique: false , nullable: true})
+  private parameters: string;
+
   @Column({ type: 'text', unique: false })
   private id_actividad: string;
 
