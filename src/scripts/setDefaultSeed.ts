@@ -16,6 +16,7 @@ import * as defaultCompanyJSON from '../seeders/company.json';
 import * as defaultDepartments from '../seeders/deparments.json';
 import * as baSeed from '../seeders/bank-account.json';
 import * as payrollSeed from '../seeders/payroll.json';
+import * as employees from '../seeders/employees.json';
 
 import { BankAccountEntity } from 'src/db/api/bank-accounts/entities/account.entity';
 import { CreateDepartmentDto } from 'src/db/api/departments/dto/create-department.dto';
@@ -36,7 +37,6 @@ export const setDefaultSeed = async () => {
     email_login: user.email_login,
     user_name: user.user_name,
   });
-  console.log(user.email_login, user.user_name);
 
   if (!defaultCompany.length) {
     const company = companyRepository.create({
@@ -67,7 +67,7 @@ export const setDefaultSeed = async () => {
   defaultRoles = await rolesRepository.find();
   defaultActivity = await activityRepository.find();
 
-  if (!defaultUser.length && defaultRoles.length && defaultActivity.length) {    
+  if (!defaultUser.length && defaultRoles.length && defaultActivity.length) {
     const adminUser = EmployeeRepository.create({
       ...user,
       roles: defaultRoles,
@@ -81,60 +81,135 @@ export const setDefaultSeed = async () => {
 
 export const setDefaultPayroll = async () => {
   const companyRepository = getRepository<CreateCompanyDto>(CompanyEntity);
-
+  // const EmployeeRepository = getRepository<CreateEmployeeDto>(EmployeeEntity);
   const defaultCompany = await companyRepository.find();
   if (defaultCompany.length) {
     const deparmentRepository =
       getRepository<CreateDepartmentDto>(DepartmentEntity);
     let departments = await deparmentRepository.find();
-    if (!departments.length) {
-      const data = deparmentRepository.create(defaultDepartments.map((item)=>({...item,company_id: defaultCompany[0].id})));
-      await deparmentRepository.save(data);
-    }
+
     const bankAccountRepository =
       getRepository<CreateBankAccountDto>(BankAccountEntity);
     let bankAccountData = await bankAccountRepository.find();
     if (!bankAccountData.length) {
-      const create = bankAccountRepository.create({...baSeed, company_id: defaultCompany[0].id});
+      const create = bankAccountRepository.create({
+        ...baSeed,
+        company_id: defaultCompany[0].id,
+      });
       await bankAccountRepository.save(create);
     }
     const payrollRepository = getRepository<CreatePayrollDto>(PayrollEntity);
     bankAccountData = await bankAccountRepository.find();
     departments = await deparmentRepository.find();
+    // if(getEmployees.length === 1 && departments.length){
+    //   const create = EmployeeRepository.create(employees.map((item)=>({...item,
+    //     company_id: defaultCompany[0].id,})));
+    //    await EmployeeRepository.save(create)
+    // }
     const data = await payrollRepository.find();
+    const [fixedPayroll] = payrollSeed.filter((item) => item.type === 'F');
+    const [occacionalPayroll] = payrollSeed.filter((item) => item.type === 'O');
+    const [subsidyPayroll] = payrollSeed.filter((item) => item.type === 'S');
+    const fixedDepartments = departments.filter((item) => item.type === 'F');
+    const occacionalDepartments = departments.filter(
+      (item) => item.type === 'O',
+    );
+    const subsidyDepartments = departments.filter((item) => item.type == 'S');
+    // getEmployees = await EmployeeRepository.find()
+    // const fixedEmployees = employees.filter((item) => item.type === 'F');
+    // const occacionalEmployees = employees.filter((item) => item.type === 'O');
+    // const subsidyEmployees = employees.filter((item) => item.type == 'S');
+    // const updateEmployee = [];
+
     if (!data.length && bankAccountData.length && departments.length) {
-      const [fixedPayroll] = payrollSeed.filter((item) => item.type === 'F');
-      const [occacionalPayroll] = payrollSeed.filter((item) => item.type === 'O');
-      const [subsidyPayroll] = payrollSeed.filter((item) => item.type === 'S');
-      const fixedDepartments = departments.filter((item) => item.type === 'F');
-      const occacionalDepartments = departments.filter(
-        (item) => item.type === 'O',
-      );
-      const subsidyDepartments = departments.filter(
-        (item) => item.type == 'S',
-      );
-      const created = payrollRepository.create([
+      const payrollCreate = payrollRepository.create([
         {
-          ...fixedPayroll,company_id: defaultCompany[0].id,
+          ...fixedPayroll,
+          company_id: defaultCompany[0].id,
           deparments: fixedDepartments,
           bank_account_id: bankAccountData[0].id,
         },
         {
-          ...subsidyPayroll,company_id: defaultCompany[0].id,
+          ...subsidyPayroll,
+          company_id: defaultCompany[0].id,
           deparments: subsidyDepartments,
           bank_account_id: bankAccountData[0].id,
         },
         {
-          ...occacionalPayroll,company_id: defaultCompany[0].id,
+          ...occacionalPayroll,
+          company_id: defaultCompany[0].id,
           deparments: occacionalDepartments,
           bank_account_id: bankAccountData[0].id,
         },
       ] as any);
-console.log(created);
 
-      await payrollRepository.save(created);
+      await payrollRepository.save(payrollCreate);
     }
   } else {
     console.log('no company');
+  }
+};
+export const setDefaultsEmployees = async () => {
+  const EmployeeRepository = getRepository<CreateEmployeeDto>(EmployeeEntity);
+  const deparmentRepository =
+    getRepository<CreateDepartmentDto>(DepartmentEntity);
+  const companyRepository = getRepository<CreateCompanyDto>(CompanyEntity);
+
+  let getEmployees = await EmployeeRepository.find();
+  let departments = await deparmentRepository.find();
+  const defaultCompany = await companyRepository.find();
+  if (!departments.length) {
+    const data = deparmentRepository.create(
+      defaultDepartments.map((item) => ({
+        ...item,
+        company_id: defaultCompany[0].id,
+      })),
+    );
+     departments =    await deparmentRepository.save(data);
+  }
+  if (departments.length && getEmployees.length == 1) {
+    const fixedEmployees = employees.filter((item) => item.type === 'F');
+    const occacionalEmployees = employees.filter((item) => item.type === 'O');
+    const subsidyEmployees = employees.filter((item) => item.type == 'S');
+    const fixedDepartments = departments.filter((item) => item.type === 'F');
+    const occacionalDepartments = departments.filter((item) => item.type === 'O');
+    const subsidyDepartments = departments.filter((item) => item.type == 'S');
+    const updateEmployee = [];
+    if (getEmployees.length == 1) {
+      fixedDepartments.map((elem) => {
+        const data = fixedEmployees.splice(0, 2);
+        data.map(async (item) => {
+          updateEmployee.push({
+            ...item,
+            department_id: elem,
+            company_id: defaultCompany[0].id,
+          });
+        });
+      });
+      occacionalDepartments.map((elem) => {
+        const data = occacionalEmployees.splice(0, 2);
+
+        data.map(async (item) => {
+          updateEmployee.push({
+            ...item,
+            department_id: elem,
+            company_id: defaultCompany[0].id,
+          });
+        });
+      });
+      subsidyDepartments.map((elem) => {
+        const data = subsidyEmployees.splice(0, 2);
+        data.map(async (item) => {
+          updateEmployee.push({
+            ...item,
+            department_id: elem,
+            company_id: defaultCompany[0].id,
+          });
+        });
+      });
+      console.log(subsidyEmployees.splice(0, 2));
+      const r = await EmployeeRepository.save(updateEmployee);
+     
+    }
   }
 };

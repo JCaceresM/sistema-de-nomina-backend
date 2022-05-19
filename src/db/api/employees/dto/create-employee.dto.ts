@@ -90,6 +90,9 @@ export class CreateEmployeeDto {
   updated_at: Date;
 
   @ApiProperty()
+  type: string;
+
+  @ApiProperty()
   created_at: Date;
 
   @ApiProperty()

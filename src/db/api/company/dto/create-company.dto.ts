@@ -9,6 +9,9 @@ export class CreateCompanyDto {
   name: string;
 
   @ApiProperty()
+  type: string;
+
+  @ApiProperty()
   RNC: string;
 
   @ApiProperty()

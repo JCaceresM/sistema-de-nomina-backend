@@ -3,7 +3,7 @@ import { CompanyEntity } from '../../company/entities/company.entity';
 
 export class CreateDepartmentDto {
   @ApiProperty()
-  private id: number;
+   id: number;
 
   @ApiProperty()
   name: string;
