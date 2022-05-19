@@ -9,14 +9,14 @@
   {
     "description":"Nomina mensula Fija",
     "type": "O",
-    "name": "Nomina mensual",
+    "name": "Nomina Ocacional",
     "status": "A"
 
   },
   {
     "description":"Nomina mensula Fija",
     "type": "S",
-    "name": "Nomina mensual",
+    "name": "Nomina Subvencional",
     "status": "A"
 
   }

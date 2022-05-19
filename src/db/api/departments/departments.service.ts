@@ -15,7 +15,7 @@ export class DepartmentsService {
         FROM department d 
         inner join payroll_deparments pd on pd."departmentId"  = d.id 
         left join lateral 
-        ( SELECT id, document_id, first_name, last_name, gender, age, marital_status, status, born_date, company_id, salary, updated_at, created_at, user_update, user_insert,
+        ( SELECT id, document_id, first_name, last_name, gender, marital_status, status, born_date, company_id, salary, updated_at, created_at, user_update, user_insert,
         department_id
         FROM employee e where d.id = e.department_id)
         as employees on true
