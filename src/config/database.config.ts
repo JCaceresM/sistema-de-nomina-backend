@@ -21,7 +21,7 @@ export function typeormModuleOptions(): TypeOrmModuleOptions {
     migrations: [join(__dirname, '../db/migrations/**/*{.ts,.js}')],
     migrationsTableName: 'migrations',
     cli: {
-      migrationsDir: 'src/db/migrations',
+      migrationsDir: 'src/db/migrations'
     },
 
     //  ssl: {
