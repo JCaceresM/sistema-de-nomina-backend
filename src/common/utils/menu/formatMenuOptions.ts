@@ -23,13 +23,14 @@ const getChildren = (menuOptions: any[], idActividad: string) => {
   return menuOptions.filter((menuOption: any) => {
 
     if (menuOption.parent === idActividad) {
-      // setTimeout( function() {
+      setTimeout( function() {
         let children = getChildren(menuOptions, menuOption.id_actividad);
         if (children.length) {
           menuOption['CHILDREN'] = children
+         
         }
-    // }, 5 );
-     
+    }, 2 );
+    // return false
     }
     return menuOption.parent === idActividad
   })

@@ -19,9 +19,9 @@ const searchCondition = (
     AND: ` AND ${fieldType(params)} ${params.operator}  '${params.condition}'`,
     IN: ` AND ${fieldType(params)} IN  (${params.condition})`,
     OR: ` OR ${fieldType(params)} ${params.operator}  '${params.condition}`,
-    BETWEEN: ` AND ${fieldType(params)} BETWEEN  ${
+    BETWEEN: ` AND ${fieldType(params)} BETWEEN  '${
       `${params.condition}`.split(',')[0]
-    }'  AND ${`${params.condition}`.split(',')[1]} `,
+    }'  AND '${`${params.condition}`.split(',')[1]}' `,
     'NOT BETWEEN': `  AND ${fieldType(params)} NOT BETWEEN  ${
       `${params.condition}`.split(',')[0]
     }'  AND ${`${params.condition}`.split(',')[1]} `,

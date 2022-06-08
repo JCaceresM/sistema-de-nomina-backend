@@ -24,9 +24,7 @@ export class ActivityService {
 	ORDER BY(a.id_actividad)
           `;
     const initial =( await getConnection().query(statement2)).map((res)=> res.id_actividad);
-    const data = await getConnection().query(statement);
-    console.log(initial);
-    
+    const data = await getConnection().query(statement);    
     return formatMenuOptions(data, initial);
   }
 }

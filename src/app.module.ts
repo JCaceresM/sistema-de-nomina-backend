@@ -16,6 +16,7 @@ import { LocalModule } from './local/local.module';
     AuthModule,
     DatabaseEntitiesModule,
     LocalModule,
+    
   ],
 
   providers: [AppConfigService],

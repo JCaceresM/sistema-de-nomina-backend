@@ -320,5 +320,33 @@
     "user_insert": "default",
     "route": "payroll/revert",
     "parameters": { "type": "P" }
+  },
+  {
+    "id_actividad": "05",
+    "description": "Reportes",
+    "parent": null,
+    "status": "A",
+    "user_insert": "default",
+    "route": null
+    
+  },
+  {
+    "id_actividad": "05-01",
+    "description": "Nominas",
+    "parent": "05",
+    "status": "A",
+    "user_insert": "default",
+    "route": "reports/payroll" 
+    
+  },
+  {
+    "id_actividad": "05-02",
+    "description": "Empleados",
+    "parent": "05",
+    "status": "A",
+    "user_insert": "default",
+    "route": "reports/employees"
+    
   }
+
 ]

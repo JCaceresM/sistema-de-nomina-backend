@@ -144,9 +144,10 @@ export class PayrollRecordService {
 	  (
       select   prd.id, prd.updated_at, prd.created_at, prd.user_update, prd.user_insert,
         prd.voucher, prd.salary, prd.payroll_record_id, prd.employee_id ,json_agg(payroll_news_record) as payroll_news_record,
-        emp.id, emp.first_name, emp.last_name, emp.gender,   emp.payment_method, emp.document_id, emp.document_id, pst."name" as position_name
+        emp.id, emp.first_name, emp.last_name, emp.gender,   emp.payment_method, emp.document_id, emp.document_id, pst."name" as position_name, d."name" as department
         from payroll_record_detail prd
          inner join  employee emp on emp.id =prd.employee_id
+         left join department d on d.id = emp.department_id
          left join  positions pst on pst.id =emp.position_id      
       left join lateral 
       (
@@ -155,11 +156,12 @@ export class PayrollRecordService {
         from payroll_news_record pnr 
         
       ) as payroll_news_record on payroll_news_record.payroll_record_detail_id =prd.id
-      GROUP BY prd.id, emp.id, pst.name
+      GROUP BY prd.id, emp.id, pst.name, d."name"
     ) as payroll_record_detail on payroll_record_detail.payroll_record_id=pr.id 
 	  where 1=1 ${await searchConditionQuery(conditions, 'payroll_record', 'pr')}
     GROUP BY pr.id
     `;
+    console.log(statement)
     const data = await getConnection().query(statement);
     return data;
   }
