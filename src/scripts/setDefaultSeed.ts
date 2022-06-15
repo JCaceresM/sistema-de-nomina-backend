@@ -207,8 +207,7 @@ export const setDefaultsEmployees = async () => {
           });
         });
       });
-      console.log(subsidyEmployees.splice(0, 2));
-      const r = await EmployeeRepository.save(updateEmployee);
+      await EmployeeRepository.save(updateEmployee);
      
     }
   }

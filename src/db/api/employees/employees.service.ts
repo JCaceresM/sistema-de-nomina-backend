@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { QueryParams } from 'src/common/types/response.type';
+import { validateLawBonus } from 'src/common/utils/date/extimation.date';
 import { searchConditionQuery, SelectConditionType } from 'src/common/utils/responses/condition.helper';
 import { BadRequest } from 'src/common/utils/responses/error.helper';
 import { paginatedQuery } from 'src/common/utils/responses/pagination';
@@ -78,6 +79,30 @@ GROUP BY emp.id, d."name"
       }
       return {...item}
     }),meta}
+  }
+  async employeesLawBonus(conditions: SelectConditionType[]=[], queryParams:QueryParams) {
+    const currentDate = new Date();
+    const statement = `
+    SELECT e.id, e.document_id, 
+    e."type",
+    e.first_name, e.last_name, 
+    e.gender, e.status, e.born_date,e.salary,  e.updated_at, e.created_at, 
+    e.user_update, e.user_insert, e.department_id,
+    COALESCE(json_agg(prd_lateral) FILTER (WHERE prd_lateral.id  IS NOT NULL), '[]') AS payroll_record_detail 
+     from employee e 
+     left join lateral 
+     (SELECT prd.id, pr.type, pr.name, prd.updated_at, prd.created_at, prd.user_update, prd.user_insert, prd.voucher, prd.salary, prd.payroll_record_id, prd.employee_id
+            FROM payroll_record_detail prd
+            inner join payroll_record pr on  pr.id = prd.payroll_record_id 
+        where   prd.created_at between '${currentDate.getFullYear()}-01-01' and '${currentDate.getFullYear()}-12-30'
+        
+     ) as prd_lateral on  prd_lateral.employee_id = e.id 
+    where  1=1 ${ await searchConditionQuery(conditions,'employee','e')}
+    group by e.id`; 
+           
+    const data = await getConnection().query(statement);
+ 
+    return data.filter((item)=> item.payroll_record_detail.length)
   }
 
   async findOne(params: UpdateEmployeeDto) {

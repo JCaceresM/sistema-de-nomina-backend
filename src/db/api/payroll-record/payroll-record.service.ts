@@ -82,12 +82,42 @@ export class PayrollRecordService {
       throw BadRequest({ body: error });
     }
   }
+  async createLawBonus(record: any) {
+    try {
+
+      const createPayrollRecordDetails  = record.employees.map((item)=> ({
+        status: 'A',
+        employee_id: item.employee_id,
+        company_id: item.company_id,
+        salary: item.salary,
+      }))
+
+      const data = await this.PayrollRecordDetail.save(
+        createPayrollRecordDetails,
+      );
+      const payrollRecordData = {
+        company_id: record.company_id,
+        name: record.name,
+        type: record.type,
+        registered_at: new Date(),
+        description: record.description,
+        status: 'R',
+        PayrollRecordDetails: data,
+        payroll_id: record.payroll_id,
+      };
+      const res: any = await this.payrollRecordRepository.save([
+        payrollRecordData,
+      ]);
+    
+      return { ...res[0], };
+    } catch (error) {
+      throw BadRequest({ body: error });
+    }
+  }
 
   async createMany(createPayrollRecordDto: any) {
     try {
-      const payrollRacordDetails = await Promise.all(
-        createPayrollRecordDto.employees.map((elem) => this.create(elem)),
-      );
+    
       const currentDate = new Date();
       const statement = `
       select *  from payroll_record pr where pr.payroll_id = ${
@@ -98,13 +128,15 @@ export class PayrollRecordService {
         currentDate.getMonth()===10? 1: currentDate.getMonth()+2
       }-01'      
       `;
-      
       const isRegistred = await getConnection().query(statement);
       if (isRegistred.length) {
         throw BadRequest({
           message: `No puedes registrar la nomina mas de una vez al mes`,
         });
       }
+      const payrollRacordDetails = await Promise.all(
+        createPayrollRecordDto.employees.map((elem) => this.create(elem)),
+      );
       const payrollRecordData = {
         company_id: createPayrollRecordDto.company_id,
         name: createPayrollRecordDto.name,
@@ -143,7 +175,7 @@ export class PayrollRecordService {
 	  left join lateral 
 	  (
       select   prd.id, prd.updated_at, prd.created_at, prd.user_update, prd.user_insert,
-        prd.voucher, prd.salary, prd.payroll_record_id, prd.employee_id ,json_agg(payroll_news_record) as payroll_news_record,
+        prd.voucher, prd.salary, prd.payroll_record_id, prd.employee_id ,COALESCE(json_agg(payroll_news_record) FILTER (WHERE payroll_news_record.id  IS NOT NULL), '[]')  as payroll_news_record,
         emp.id, emp.first_name, emp.last_name, emp.gender,   emp.payment_method, emp.document_id, emp.document_id, pst."name" as position_name, d."name" as department
         from payroll_record_detail prd
          inner join  employee emp on emp.id =prd.employee_id
@@ -161,7 +193,6 @@ export class PayrollRecordService {
 	  where 1=1 ${await searchConditionQuery(conditions, 'payroll_record', 'pr')}
     GROUP BY pr.id
     `;
-    console.log(statement)
     const data = await getConnection().query(statement);
     return data;
   }

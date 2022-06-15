@@ -51,3 +51,24 @@ export const JWTExpirationToken = (time: string) => {
     console.error('Error while create expired Token date');
   }
 };
+
+export const validateLawBonus = (record: Array<any>): boolean => {
+  const sorted = record.sort(
+    (date1, date2) => date1.created_at - date2.created_at,
+  );
+  if (record.length < 1) return false;
+  return sorted.every((element, index, array) => {
+    
+    if (index > 0) {
+      if (element.type !== 'R') {
+        const next = new Date(element).getMonth();
+        const prev = new Date(array[index - 1]).getMonth();
+        return prev + 1 === next;
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
+  });
+};

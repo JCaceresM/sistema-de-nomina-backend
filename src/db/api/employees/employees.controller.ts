@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { QueryParams } from 'src/common/types/response.type';
 import { SelectConditionType } from 'src/common/utils/responses/condition.helper';
 import { CreateAddressDto } from '../address/dto/create-address.dto';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
@@ -24,6 +25,10 @@ export class EmployeesController {
   @Post()
   create(@Body() record: CreateEmployeeDto & CreateAddressDto) {
     return this.employeesService.createEmployee(record);
+  }
+  @Post('law-bonus')
+  employeesLawBonus(@Body() record: {conditions: SelectConditionType[], queryParams:QueryParams}) {
+    return this.employeesService.employeesLawBonus(record.conditions, record.queryParams);
   }
 
   @Post('collection')

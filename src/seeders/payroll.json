@@ -19,6 +19,13 @@
     "name": "Nomina Subvencional",
     "status": "A"
 
+  },
+  {
+    "description":"Nomina sueldo 13",
+    "type": "R",
+    "name": "Regalia",
+    "status": "A"
+
   }
 
 ]

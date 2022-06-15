@@ -323,6 +323,24 @@
   },
   {
     "id_actividad": "05",
+    "description": "Regalia",
+    "parent": null,
+    "status": "A",
+    "user_insert": "default",
+    "route": null
+    
+  },
+  {
+    "id_actividad": "05-02",
+    "description": "consultar",
+    "parent": "05",
+    "status": "A",
+    "user_insert": "default",
+    "route": "easter-bonus/consult"
+    
+  },
+  {
+    "id_actividad": "06",
     "description": "Reportes",
     "parent": null,
     "status": "A",
@@ -331,18 +349,18 @@
     
   },
   {
-    "id_actividad": "05-01",
+    "id_actividad": "06-01",
     "description": "Nominas",
-    "parent": "05",
+    "parent": "06",
     "status": "A",
     "user_insert": "default",
     "route": "reports/payroll" 
     
   },
   {
-    "id_actividad": "05-02",
+    "id_actividad": "06-02",
     "description": "Empleados",
-    "parent": "05",
+    "parent": "06",
     "status": "A",
     "user_insert": "default",
     "route": "reports/employees"

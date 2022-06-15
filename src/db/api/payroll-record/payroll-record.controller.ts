@@ -26,6 +26,18 @@ export class PayrollRecordController {
   create(@Body() createPayrollRecordDto: CreatePayrollRecordDto) {
     return this.payrollRecordService.createMany(createPayrollRecordDto);
   }
+  @Post('law-bonus-done')
+  async createLawBonus(@Body() createPayrollRecordDto: any) {
+    const res = await this.payrollRecordService.createLawBonus(
+      createPayrollRecordDto,
+    );
+   await  this.paymentDone({
+      payroll_record_id: res.id,
+      bank_account_id: createPayrollRecordDto.bank_account_id,
+      transaction_type: 'DV',
+    });
+    return {message: 'Pago Realizado', data: res}
+  }
 
   @Post('collection')
   find(@Body() params) {
@@ -53,7 +65,7 @@ export class PayrollRecordController {
           condition: body.payroll_record_id,
         },
       ]);
-      
+
       if (payroll.length) {
         await this.bankAccountsService.payment(
           body.payroll_record_id,
@@ -65,8 +77,7 @@ export class PayrollRecordController {
           +body.payroll_record_id,
           { status: 'AU' },
         );
-    return {message: 'Pago Realizado'}
-     
+        return { message: 'Pago Realizado' };
       } else {
         throw BadRequest({ message: ' Esta nomina no existe' });
       }
