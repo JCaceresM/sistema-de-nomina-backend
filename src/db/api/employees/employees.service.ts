@@ -90,6 +90,7 @@ GROUP BY emp.id, d."name"
     e.user_update, e.user_insert, e.department_id,
     COALESCE(json_agg(prd_lateral) FILTER (WHERE prd_lateral.id  IS NOT NULL), '[]') AS payroll_record_detail 
      from employee e 
+   
      left join lateral 
      (SELECT prd.id, pr.type, pr.name, prd.updated_at, prd.created_at, prd.user_update, prd.user_insert, prd.voucher, prd.salary, prd.payroll_record_id, prd.employee_id
             FROM payroll_record_detail prd
@@ -102,7 +103,7 @@ GROUP BY emp.id, d."name"
            
     const data = await getConnection().query(statement);
  
-    return data.filter((item)=> item.payroll_record_detail.length)
+    return data.filter((item)=> validateLawBonus(item.payroll_record_detail))
   }
 
   async findOne(params: UpdateEmployeeDto) {

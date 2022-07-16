@@ -1,20 +1,20 @@
 [
   {
-    "description":"Nomina mensula Fija",
+    "description":"Nomina  Fija",
     "type": "F",
     "name": "Nomina mensual",
     "status": "A"
 
   },
   {
-    "description":"Nomina mensula Fija",
+    "description":"Nomina Fija",
     "type": "O",
     "name": "Nomina Ocacional",
     "status": "A"
 
   },
   {
-    "description":"Nomina mensula Fija",
+    "description":"Nomina Fija",
     "type": "S",
     "name": "Nomina Subvencional",
     "status": "A"

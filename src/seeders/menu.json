@@ -340,6 +340,15 @@
     
   },
   {
+    "id_actividad": "05-03",
+    "description": "Pago",
+    "parent": "05",
+    "status": "A",
+    "user_insert": "default",
+    "route": "easter-bonus/payment"
+    
+  },
+  {
     "id_actividad": "06",
     "description": "Reportes",
     "parent": null,

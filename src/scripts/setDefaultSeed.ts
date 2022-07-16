@@ -177,8 +177,8 @@ export const setDefaultsEmployees = async () => {
     const updateEmployee = [];
     if (getEmployees.length == 1) {
       fixedDepartments.map((elem) => {
-        const data = fixedEmployees.splice(0, 2);
-        data.map(async (item) => {
+        // const data = fixedEmployees.splice(0, 2);
+        fixedEmployees.map(async (item) => {
           updateEmployee.push({
             ...item,
             department_id: elem,
@@ -187,9 +187,9 @@ export const setDefaultsEmployees = async () => {
         });
       });
       occacionalDepartments.map((elem) => {
-        const data = occacionalEmployees.splice(0, 2);
+        // const data = occacionalEmployees.splice(0, 2);
 
-        data.map(async (item) => {
+        occacionalEmployees.map(async (item) => {
           updateEmployee.push({
             ...item,
             department_id: elem,
@@ -198,8 +198,8 @@ export const setDefaultsEmployees = async () => {
         });
       });
       subsidyDepartments.map((elem) => {
-        const data = subsidyEmployees.splice(0, 2);
-        data.map(async (item) => {
+        // const data = subsidyEmployees.splice(0, 2);
+        subsidyEmployees.map(async (item) => {
           updateEmployee.push({
             ...item,
             department_id: elem,

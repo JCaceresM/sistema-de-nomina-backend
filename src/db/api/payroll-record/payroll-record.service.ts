@@ -128,12 +128,12 @@ export class PayrollRecordService {
         currentDate.getMonth()===10? 1: currentDate.getMonth()+2
       }-01'      
       `;
-      const isRegistred = await getConnection().query(statement);
-      if (isRegistred.length) {
-        throw BadRequest({
-          message: `No puedes registrar la nomina mas de una vez al mes`,
-        });
-      }
+      // const isRegistred = await getConnection().query(statement);
+      // if (isRegistred.length) {
+      //   throw BadRequest({
+      //     message: `No puedes registrar la nomina mas de una vez al mes`,
+      //   });
+      // }
       const payrollRacordDetails = await Promise.all(
         createPayrollRecordDto.employees.map((elem) => this.create(elem)),
       );

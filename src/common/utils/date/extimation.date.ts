@@ -65,7 +65,7 @@ export const validateLawBonus = (record: Array<any>): boolean => {
         const prev = new Date(array[index - 1]).getMonth();
         return prev + 1 === next;
       } else {
-        return true;
+        return false;
       }
     } else {
       return true;
