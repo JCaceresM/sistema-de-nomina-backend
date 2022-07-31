@@ -82,6 +82,8 @@ export const setDefaultSeed = async () => {
 export const setDefaultPayroll = async () => {
   const companyRepository = getRepository<CreateCompanyDto>(CompanyEntity);
   // const EmployeeRepository = getRepository<CreateEmployeeDto>(EmployeeEntity);
+ 
+  
   const defaultCompany = await companyRepository.find();
   if (defaultCompany.length) {
     const deparmentRepository =
@@ -120,25 +122,26 @@ export const setDefaultPayroll = async () => {
     // const occacionalEmployees = employees.filter((item) => item.type === 'O');
     // const subsidyEmployees = employees.filter((item) => item.type == 'S');
     // const updateEmployee = [];
+console.log(fixedDepartments);
 
     if (!data.length && bankAccountData.length && departments.length) {
       const payrollCreate = payrollRepository.create([
         {
           ...fixedPayroll,
           company_id: defaultCompany[0].id,
-          deparments: fixedDepartments,
+          departments: fixedDepartments,
           bank_account_id: bankAccountData[0].id,
         },
         {
           ...subsidyPayroll,
           company_id: defaultCompany[0].id,
-          deparments: subsidyDepartments,
+          departments: subsidyDepartments,
           bank_account_id: bankAccountData[0].id,
         },
         {
           ...occacionalPayroll,
           company_id: defaultCompany[0].id,
-          deparments: occacionalDepartments,
+          departments: occacionalDepartments,
           bank_account_id: bankAccountData[0].id,
         },
       ] as any);
@@ -154,7 +157,7 @@ export const setDefaultsEmployees = async () => {
   const deparmentRepository =
     getRepository<CreateDepartmentDto>(DepartmentEntity);
   const companyRepository = getRepository<CreateCompanyDto>(CompanyEntity);
-
+ 
   let getEmployees = await EmployeeRepository.find();
   let departments = await deparmentRepository.find();
   const defaultCompany = await companyRepository.find();
@@ -175,10 +178,13 @@ export const setDefaultsEmployees = async () => {
     const occacionalDepartments = departments.filter((item) => item.type === 'O');
     const subsidyDepartments = departments.filter((item) => item.type == 'S');
     const updateEmployee = [];
+    //  console.log(fixedEmployees.some((item)=> subsidyEmployees.filter(e=> e.document_id === item.document_id).length));
     if (getEmployees.length == 1) {
       fixedDepartments.map((elem) => {
-        // const data = fixedEmployees.splice(0, 2);
-        fixedEmployees.map(async (item) => {
+        const data = fixedEmployees.splice(0, Math.round(fixedEmployees.length/ fixedDepartments.length))
+        console.log(Math.round(fixedEmployees.length/ fixedDepartments.length));
+        
+        data.map(async (item) => {
           updateEmployee.push({
             ...item,
             department_id: elem,
@@ -187,9 +193,9 @@ export const setDefaultsEmployees = async () => {
         });
       });
       occacionalDepartments.map((elem) => {
-        // const data = occacionalEmployees.splice(0, 2);
+        const data = occacionalEmployees.splice(0, Math.round(occacionalEmployees.length/ occacionalDepartments.length));
 
-        occacionalEmployees.map(async (item) => {
+        data.map(async (item) => {
           updateEmployee.push({
             ...item,
             department_id: elem,
@@ -198,8 +204,8 @@ export const setDefaultsEmployees = async () => {
         });
       });
       subsidyDepartments.map((elem) => {
-        // const data = subsidyEmployees.splice(0, 2);
-        subsidyEmployees.map(async (item) => {
+        const data = subsidyEmployees.splice(0, Math.round(subsidyEmployees.length/ subsidyDepartments.length))
+        data.map(async (item) => {
           updateEmployee.push({
             ...item,
             department_id: elem,

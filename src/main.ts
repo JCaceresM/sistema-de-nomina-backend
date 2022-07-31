@@ -5,7 +5,7 @@ import * as helmet from 'helmet';
 import * as bodyParser from 'body-parser';
 import { API_PREFIX } from './common/constants/global/globalContansts';
 import { ConfigService } from '@nestjs/config';
-import { initSwagger } from './app.swagger';
+// import { initSwagger } from './app.swagger';
 import { AppConfigService } from './config/getterConfig.service';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import {setDefaultSeed,setDefaultPayroll, setDefaultsEmployees} from './scripts/setDefaultSeed';
@@ -23,7 +23,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   
   
-  initSwagger(app)
+  // initSwagger(app)
   generateTypeormConfigFile(config, appConfig);
   await setDefaultSeed();
   await setDefaultsEmployees();

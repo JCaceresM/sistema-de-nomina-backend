@@ -62,5 +62,5 @@ export class PayrollEntity {
 
   @ManyToMany(() => DepartmentEntity, {cascade:true})
   @JoinTable({name: 'payroll_deparments'})
-  deparments: DepartmentEntity[]
+  departments: DepartmentEntity[]
 }

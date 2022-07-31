@@ -72,7 +72,8 @@ GROUP BY emp.id, d."name"
   
         `;        
         const [data, meta]:any = await paginatedQuery(statement, queryParams);
- 
+    console.log(data.length, queryParams);
+    
     return {data:data.map((item)=> {
       if(item.payroll_news.some(item=> item ===null)){
         delete item.payroll_news

@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { QueryParams } from 'src/common/types/response.type';
 import { SelectConditionType } from 'src/common/utils/responses/condition.helper';
@@ -32,8 +33,9 @@ export class EmployeesController {
   }
 
   @Post('collection')
-  async findAll(@Param('take') take: number,@Param('skip') skip: number, @Body() params: {searchConditions:SelectConditionType[]}) {    
-    return this.employeesService.find(params.searchConditions,{page:take,size:skip});
+  async findAll(@Query('take') take: number, @Query('skip') skip: number, @Body() params: {searchConditions:SelectConditionType[]}) { 
+       
+    return this.employeesService.find(params.searchConditions,{page:skip,size:take});
   }
 
   @Get(':id')
