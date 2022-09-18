@@ -18,17 +18,18 @@ export const paginatedQuery = async <T>(
     page: pageNumber = DEFAULT_PAGINATION_PAGE_NUMBER,
     size: pageSize = DEFAULT_PAGINATION_PAGE_SIZE,
   } = queryParams;
-  const startPosition = pageSize * (pageNumber - 1);
-  const finishPosition = startPosition + pageSize;
+  const startPosition = Number(pageSize) * Number((pageNumber > 0 ? pageNumber: 1) - 1);
+  const finishPosition = Number(startPosition) + Number(pageSize);
   const mainQuerySql =
     typeof queryElement === 'string' ? queryElement : queryElement.getSql();
   const paginatedQuerySql = `
+   
     SELECT *
     FROM (${mainQuerySql}) as a
-    LIMIT ${finishPosition}
-    OFFSET ${startPosition};
+    LIMIT ${Math.abs(finishPosition)}
+    OFFSET ${Math.abs(startPosition)};
   `;
-
+  console.log("🚀 ~ file: pagination.ts ~ line 26 ~ paginatedQuerySql", paginatedQuerySql)
   try {
     const result = await getConnection().query(paginatedQuerySql);
     const [{ rowcount = 0 }] = await getConnection().query(

@@ -72,11 +72,11 @@ GROUP BY emp.id, d."name"
   
         `;        
         const [data, meta]:any = await paginatedQuery(statement, queryParams);
-    console.log(data.length, queryParams);
+        console.log("🚀 ~ file: employees.service.ts ~ line 75 ~ EmployeesService ~ find ~ queryParams", queryParams)
     
     return {data:data.map((item)=> {
       if(item.payroll_news.some(item=> item ===null)){
-        delete item.payroll_news
+        delete item.payroll_news 
       }
       return {...item}
     }),meta}
